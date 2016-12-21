@@ -1,0 +1,5 @@
+#!/bin/bash
+MIASTO1=1763 # get from input
+MIASTO2=2215 # get from input
+SITE=$(curl 'http://www.odleglosci.pl/odleglosci.php' -H 'Cookie: komunikat_cookie_odl_pl=1; _ga=GA1.2.1735110514.1482245249; _gat=1' -H 'Origin: http://www.odleglosci.pl' -H 'Accept-Encoding: gzip, deflate' -H 'Accept-Language: pl-PL,pl;q=0.8,en-US;q=0.6,en;q=0.4,de;q=0.2' -H 'Upgrade-Insecure-Requests: 1' -H 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36' -H 'Content-Type: application/x-www-form-urlencoded' -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8' -H 'Cache-Control: max-age=0' -H 'Referer: http://www.odleglosci.pl/odleglosci.php' -H 'Connection: keep-alive' --data 'woj1=Wszystkie+wojew%C3%B3dztwa&miasto1='+$MIASTO1+'&woj2=Wszystkie+wojew%C3%B3dztwa&miasto2='+$MIASTO2+'&szukaj=Wyznacz&wyslij=wyslij' --compressed)
+echo $SITE | grep -oP ">\K[0-9.]*(?= km<)"
