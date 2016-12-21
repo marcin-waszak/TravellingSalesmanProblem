@@ -1,0 +1,5 @@
+1. Przygotowanie danych: 
+	1) Pobranie ze strony http://www.odleglosci.pl/odleglosci.php listy dostepnych miast
+	2) Ograniczenie listy miast do 93.
+	3) Przygotowanie skryptow parsujacych dane ze strony dotyczace odleglosci pomiedzy miastami
+	4) Pobranie dystansow dla wszystkich par miast z listy.
