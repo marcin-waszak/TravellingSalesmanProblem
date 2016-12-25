@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +15,7 @@ namespace TravellingSalesmanProblem
     {
         private int x_;
         private int y_;
+        private BindingList<Location> locations_;
 
         public MainForm()
         {
@@ -44,6 +46,27 @@ namespace TravellingSalesmanProblem
                 "\nAleksander Białobrzeski",
                 "About",
                 MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+        }
+
+        private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
+        {
+            StreamReader my_reader = new StreamReader(openFileDialog1.FileName);
+            locations_ = new BindingList<Location>();
+
+            while (!my_reader.EndOfStream)
+            {
+                var line = my_reader.ReadLine();
+                var values = line.Split(';');
+
+                locations_.Add(new Location(values));
+            }
+
+            my_reader.Close();
+        }
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.ShowDialog();
         }
     }
 }
