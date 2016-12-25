@@ -33,5 +33,17 @@ namespace TravellingSalesmanProblem
             ++x_;
             Invalidate();
         }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(
+                "The Travelling Salesman Problem with genetic algorithm approach." +
+                "\n\nApplication licensed under GNU GPL. Copyright 2016." +
+                "\n\nDamian Bułak" +
+                "\nMarcin Waszak" +
+                "\nAleksander Białobrzeski",
+                "About",
+                MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+        }
     }
 }
