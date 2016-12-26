@@ -1,2 +1,2 @@
 # TravellingSalesmanProblem
-Travelling Salesman Problem with genetic algorithm approach
+The Travelling Salesman Problem with genetic algorithm approach
