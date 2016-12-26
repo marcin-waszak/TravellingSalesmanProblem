@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace TravellingSalesmanProblem
 {
-    class Location
+    class Town
     {
         protected string name_;
         protected double latitude_;     // y coord // szerokosc
         protected double longitude_;    // x coord // dlugosc
 
-        public Location(string[] input)
+        public Town(string[] input)
         {
             name_ = input[0];
             name_ = input[1];
@@ -21,12 +21,23 @@ namespace TravellingSalesmanProblem
             longitude_ = double.Parse(input[2], CultureInfo.InvariantCulture);
         }
 
-        public double Distance(Location a, Location b)
+        public static double Distance(Town a, Town b)
         {
             const double km_per_degree = 111.196672;
-            double delta = Math.Acos(Math.Sin(a.latitude_) * Math.Sin(b.latitude_)
-                + Math.Cos(a.latitude_) * Math.Cos(b.latitude_) * Math.Cos(a.longitude_ - b.longitude_));
-            return delta * km_per_degree;
+            double delta = Math.Acos(Math.Sin(Rad(a.latitude_)) * Math.Sin(Rad(b.latitude_))
+                + Math.Cos(Rad(a.latitude_)) * Math.Cos(Rad(b.latitude_)) * Math.Cos(Rad(a.longitude_ - b.longitude_)));
+            return Deg(delta) * km_per_degree;
         }
+
+        private static double Rad(double input)
+        {
+            return input * Math.PI / 180.0;
+        }
+
+        private static double Deg(double input)
+        {
+            return input * 180.0 / Math.PI;
+        }
+
     }
 }

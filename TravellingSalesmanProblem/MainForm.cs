@@ -15,7 +15,7 @@ namespace TravellingSalesmanProblem
     {
         private int x_;
         private int y_;
-        private BindingList<Location> locations_;
+        private BindingList<Town> locations_;
 
         public MainForm()
         {
@@ -51,14 +51,14 @@ namespace TravellingSalesmanProblem
         private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
         {
             StreamReader my_reader = new StreamReader(openFileDialog1.FileName);
-            locations_ = new BindingList<Location>();
+            locations_ = new BindingList<Town>();
 
             while (!my_reader.EndOfStream)
             {
                 var line = my_reader.ReadLine();
                 var values = line.Split(';');
 
-                locations_.Add(new Location(values));
+                locations_.Add(new Town(values));
             }
 
             my_reader.Close();
