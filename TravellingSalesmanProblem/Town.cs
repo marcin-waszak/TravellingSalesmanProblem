@@ -13,13 +13,53 @@ namespace TravellingSalesmanProblem
         protected double latitude_;     // y coord // szerokosc
         protected double longitude_;    // x coord // dlugosc
 
+        public Town(string name, double latitude, double longitude)
+        {
+            name_ = string.Copy(name);
+            latitude_ = latitude;
+            longitude_ = longitude;
+        }
+
         public Town(string[] input)
         {
             name_ = input[0];
-            name_ = input[1];
             latitude_ = double.Parse(input[1], CultureInfo.InvariantCulture);
             longitude_ = double.Parse(input[2], CultureInfo.InvariantCulture);
         }
+
+        // Setters and getters
+
+        public string getName()
+        {
+            return name_;
+        }
+
+        public void setName(string value)
+        {
+            name_ = value;
+        }
+
+        public double getLatitude()
+        {
+            return latitude_;
+        }
+
+        public void setLatitude(double value)
+        {
+            latitude_ = value;
+        }
+
+        public double getLongitude()
+        {
+            return longitude_;
+        }
+
+        public void setLongitude(double value)
+        {
+            longitude_ = value;
+        }
+
+        // Static methods
 
         public static double Distance(Town a, Town b)
         {
