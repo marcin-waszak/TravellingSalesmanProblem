@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TravellingSalesmanProblem
 {
-    class Town
+    public class Town
     {
         protected string name_;
         protected double latitude_;     // y coord // szerokosc
@@ -15,7 +15,7 @@ namespace TravellingSalesmanProblem
 
         public Town(string name, double latitude, double longitude)
         {
-            name_ = string.Copy(name);
+            name_ = name;
             latitude_ = latitude;
             longitude_ = longitude;
         }
@@ -78,6 +78,5 @@ namespace TravellingSalesmanProblem
         {
             return input * 180.0 / Math.PI;
         }
-
     }
 }
