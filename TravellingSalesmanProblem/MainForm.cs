@@ -15,14 +15,14 @@ namespace TravellingSalesmanProblem
     {
         private int x_;
         private int y_;
-        private BindingList<Town> towns_;
+        private BindingList<City> towns_;
 
-        private Program.Algoritms algorithm_;
+        private Program.AlgorithmType _algorithmType;
         private int mi_;
         private int lambda_;
         private int n_;
 
-        public MainForm(ref BindingList<Town> towns)
+        public MainForm(ref BindingList<City> towns)
         {
             towns_ = towns;
 
@@ -35,9 +35,9 @@ namespace TravellingSalesmanProblem
         private void ReadSettings()
         {
             if (AlgorithmPlusRadio.Checked)
-                algorithm_ = Program.Algoritms.MiPlusLambda;
+                _algorithmType = Program.AlgorithmType.MiPlusLambda;
             else if (AlgorithmCommaRadio.Checked)
-                algorithm_ = Program.Algoritms.MiCommaLambda;
+                _algorithmType = Program.AlgorithmType.MiCommaLambda;
 
             mi_ = Convert.ToInt32(numericUpDown1.Value);
             lambda_ = Convert.ToInt32(numericUpDown2.Value);
@@ -75,14 +75,14 @@ namespace TravellingSalesmanProblem
         private void ParseFile()
         {
             StreamReader my_reader = new StreamReader(openFileDialog1.FileName);
-            towns_ = new BindingList<Town>();
+            towns_ = new BindingList<City>();
 
             while (!my_reader.EndOfStream)
             {
                 var line = my_reader.ReadLine();
                 var values = line.Split(';');
 
-                towns_.Add(new Town(values));
+                towns_.Add(new City(values));
             }
 
             my_reader.Close();
@@ -97,7 +97,18 @@ namespace TravellingSalesmanProblem
         {
             ReadSettings();
             ChangeStart();
-            //Program.Algorithm();
+
+            // TODO change it to async and apply listener
+            Program.Algorithm(_algorithmType, mi_, lambda_, n_, towns_);
+            /*
+                TODO Run the tourCalculator in another thread and request it status and progress
+                while (GetAlgorithmStatus != FINISHED)
+                {
+                    List<City> townsBeingVisitedNow = GetAlgorithmProgress();
+                    DrawTowns(townsBeingVisitedNow);
+                }
+
+            */
         }
 
         public void ChangeStart()

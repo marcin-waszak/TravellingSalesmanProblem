@@ -9,12 +9,12 @@ namespace TravellingSalesmanProblem
 {
     static class Program
     {
-        public enum Algoritms {
+        public enum AlgorithmType {
             MiPlusLambda,
             MiCommaLambda
         };
 
-        private static BindingList<Town> towns_;
+        private static BindingList<City> _towns;
 
         /// <summary>
         /// The main entry point for the application.
@@ -26,12 +26,19 @@ namespace TravellingSalesmanProblem
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm(ref towns_));
+            Application.Run(new MainForm(ref _towns));
         }
 
         private static void Initialize()
         {
-            towns_ = new BindingList<Town>();
+            _towns = new BindingList<City>();
+        }
+
+        public static void Algorithm(AlgorithmType algorithmTypeType, int mi, int lambda,
+            int numberOfTowns, IList<City> towns)
+        {
+            var tourCalculator = new TourCalculator(algorithmTypeType, mi, lambda, numberOfTowns, towns);
+            tourCalculator.Run();
         }
     }
 }
