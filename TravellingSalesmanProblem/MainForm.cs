@@ -13,46 +13,68 @@ namespace TravellingSalesmanProblem
 {
     public partial class MainForm : Form
     {
-        private int x_;
-        private int y_;
-        private BindingList<Town> towns_;
+        private Program.Algoritms _algorithm;
+        private int _m_;
+        private int _lambda;
+        private int _n;
 
-        private Program.Algoritms algorithm_;
-        private int mi_;
-        private int lambda_;
-        private int n_;
+        private TownCollection _towns;
+        private TownCollection _draw_towns;
 
-        public MainForm(ref BindingList<Town> towns)
+        private const float DotSize = 6.0f;
+
+        private struct DrawPoint
         {
-            towns_ = towns;
+            public string Name { get; private set; }
+            public float X { get; private set; }
+            public float Y { get; private set; }
+
+            public DrawPoint(string name, float x, float y)
+            {
+                Name = name;
+                X = x;
+                Y = y;
+            }
+        }
+
+        private BindingList<DrawPoint> _draw_points;
+
+        public MainForm(ref TownCollection towns)
+        {
+            _towns = towns;
+            _draw_towns = new TownCollection();
+            _draw_points = new BindingList<DrawPoint>();
 
             InitializeComponent();
-
-            x_ = 10;
-            y_ = 100;
         }
 
         private void ReadSettings()
         {
             if (AlgorithmPlusRadio.Checked)
-                algorithm_ = Program.Algoritms.MiPlusLambda;
+                _algorithm = Program.Algoritms.MiPlusLambda;
             else if (AlgorithmCommaRadio.Checked)
-                algorithm_ = Program.Algoritms.MiCommaLambda;
+                _algorithm = Program.Algoritms.MiCommaLambda;
 
-            mi_ = Convert.ToInt32(numericUpDown1.Value);
-            lambda_ = Convert.ToInt32(numericUpDown2.Value);
-            n_ = Convert.ToInt32(numericUpDown3.Value);
+            _m_ = Convert.ToInt32(numericUpDown1.Value);
+            _lambda = Convert.ToInt32(numericUpDown2.Value);
+            _n = Convert.ToInt32(numericUpDown3.Value);
         }
 
-        private void Form1_Paint(object sender, PaintEventArgs e)
+        private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
         {
-            e.Graphics.FillRectangle(Brushes.Aqua, x_, y_, 80, 80);
+            ScaleList();
+
+            for (int i = 0; i < _draw_points.Count; ++i)
+            {
+                float x = _draw_points[i].X;
+                float y = _draw_points[i].Y;
+                e.Graphics.FillRectangle(Brushes.Red, x, y, DotSize, DotSize);
+            }
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            ++x_;
-            Invalidate();
+
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
@@ -75,14 +97,14 @@ namespace TravellingSalesmanProblem
         private void ParseFile()
         {
             StreamReader my_reader = new StreamReader(openFileDialog1.FileName);
-            towns_ = new BindingList<Town>();
+            _towns = new TownCollection();
 
             while (!my_reader.EndOfStream)
             {
                 var line = my_reader.ReadLine();
                 var values = line.Split(';');
 
-                towns_.Add(new Town(values));
+                _towns.Add(new Town(values));
             }
 
             my_reader.Close();
@@ -97,7 +119,61 @@ namespace TravellingSalesmanProblem
         {
             ReadSettings();
             ChangeStart();
+
             //Program.Algorithm();
+
+            CreateList();
+
+            splitContainer1.Panel1.Invalidate();
+        }
+
+        private void ScaleList()
+        {
+            float min_longitude = _draw_towns.MinLongitude;
+            float min_latitude = _draw_towns.MinLatitude;
+
+            float delta_longitude = _draw_towns.MaxLongitude - min_longitude;
+            float delta_latitude = _draw_towns.MaxLatitude - min_latitude;
+            float points_ratio = delta_longitude / delta_latitude;
+
+            float panel_width = splitContainer1.Panel1.Width;
+            float panel_height = splitContainer1.Panel1.Height;
+            float panel_ratio = panel_width / panel_height;
+
+            float scale = 1.0f;
+
+            if (points_ratio > panel_ratio)
+                scale = (panel_width) / delta_longitude;
+            else
+                scale = (panel_height) / delta_latitude;
+
+            _draw_points.Clear();
+
+            for (int i = 0; i < _n && i < _draw_towns.Count; ++i)
+            {
+                float x = _draw_towns[i].Longitude - _draw_towns.MinLongitude;
+                float y = _draw_towns[i].Latitude - _draw_towns.MinLatitude;
+
+                x *= scale;
+                y *= scale;
+                x += -DotSize / 2.0f;
+                y += -DotSize / 2.0f;
+
+                string name = _draw_towns[i].Name;
+                _draw_points.Add(new DrawPoint(name, x, y));
+            }
+        }
+
+        private void CreateList()
+        {
+            _draw_towns.Clear();
+
+            for (int i = 0; i < _n && i < _towns.Count; ++i)
+                _draw_towns.Add(_towns[i].Name, _towns[i].Latitude, _towns[i].Longitude);
+
+            _draw_towns.FlipLatitude();
+            _draw_towns.CancelOffset();
+            _draw_towns.ScaleLatitude(1.6f); // 1.6 ~ 1/cos(52 deg), latitude correction
         }
 
         public void ChangeStart()
