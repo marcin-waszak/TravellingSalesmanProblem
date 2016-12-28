@@ -9,74 +9,42 @@ namespace TravellingSalesmanProblem
 {
     public class Town
     {
-        protected string name_;
-        protected double latitude_;     // y coord // szerokosc
-        protected double longitude_;    // x coord // dlugosc
+        public string Name { get; set; }
+        public float Latitude { get; set; }
+        public float Longitude { get; set; }
 
-        public Town(string name, double latitude, double longitude)
+        public Town(string name, float latitude, float longitude)
         {
-            name_ = name;
-            latitude_ = latitude;
-            longitude_ = longitude;
+            Name = name;
+            Latitude = latitude;
+            Longitude = longitude;
         }
 
         public Town(string[] input)
         {
-            name_ = input[0];
-            latitude_ = double.Parse(input[1], CultureInfo.InvariantCulture);
-            longitude_ = double.Parse(input[2], CultureInfo.InvariantCulture);
-        }
-
-        // Setters and getters
-
-        public string getName()
-        {
-            return name_;
-        }
-
-        public void setName(string value)
-        {
-            name_ = value;
-        }
-
-        public double getLatitude()
-        {
-            return latitude_;
-        }
-
-        public void setLatitude(double value)
-        {
-            latitude_ = value;
-        }
-
-        public double getLongitude()
-        {
-            return longitude_;
-        }
-
-        public void setLongitude(double value)
-        {
-            longitude_ = value;
+            Name = input[0];
+            Latitude = float.Parse(input[1], CultureInfo.InvariantCulture);
+            Longitude = float.Parse(input[2], CultureInfo.InvariantCulture);
         }
 
         // Static methods
 
-        public static double Distance(Town a, Town b)
+        public static float Distance(Town a, Town b)
         {
-            const double km_per_degree = 111.196672;
-            double delta = Math.Acos(Math.Sin(Rad(a.latitude_)) * Math.Sin(Rad(b.latitude_))
-                + Math.Cos(Rad(a.latitude_)) * Math.Cos(Rad(b.latitude_)) * Math.Cos(Rad(a.longitude_ - b.longitude_)));
+            const float km_per_degree = 111.196672f;
+            float delta = (float)Math.Acos(Math.Sin(Rad(a.Latitude)) * Math.Sin(Rad(b.Latitude))
+                + Math.Cos(Rad(a.Latitude)) * Math.Cos(Rad(b.Latitude)) * Math.Cos(Rad(a.Longitude - b.Longitude)));
             return Deg(delta) * km_per_degree;
         }
 
-        private static double Rad(double input)
+        private static float Rad(float input)
         {
-            return input * Math.PI / 180.0;
+            return input * (float)Math.PI / 180.0f;
         }
 
-        private static double Deg(double input)
+        private static float Deg(float input)
         {
-            return input * 180.0 / Math.PI;
+            return input * 180.0f / (float)Math.PI;
         }
     }
 }

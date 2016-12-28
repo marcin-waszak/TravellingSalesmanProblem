@@ -14,7 +14,7 @@ namespace TravellingSalesmanProblem
             MiCommaLambda
         };
 
-        private static BindingList<Town> towns_;
+        private static TownCollection _towns;
 
         /// <summary>
         /// The main entry point for the application.
@@ -26,12 +26,12 @@ namespace TravellingSalesmanProblem
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm(ref towns_));
+            Application.Run(new MainForm(ref _towns));
         }
 
         private static void Initialize()
         {
-            towns_ = new BindingList<Town>();
+            _towns = new TownCollection();
         }
     }
 }

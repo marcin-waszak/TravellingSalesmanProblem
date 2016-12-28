@@ -133,6 +133,10 @@
             this.splitContainer1.Location = new System.Drawing.Point(0, 0);
             this.splitContainer1.Name = "splitContainer1";
             // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer1_Panel1_Paint);
+            // 
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.groupBox3);
@@ -190,6 +194,11 @@
             // numericUpDown3
             // 
             this.numericUpDown3.Location = new System.Drawing.Point(38, 77);
+            this.numericUpDown3.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
             this.numericUpDown3.Name = "numericUpDown3";
             this.numericUpDown3.Size = new System.Drawing.Size(85, 20);
             this.numericUpDown3.TabIndex = 5;
@@ -206,6 +215,11 @@
             // numericUpDown2
             // 
             this.numericUpDown2.Location = new System.Drawing.Point(38, 51);
+            this.numericUpDown2.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
             this.numericUpDown2.Name = "numericUpDown2";
             this.numericUpDown2.Size = new System.Drawing.Size(85, 20);
             this.numericUpDown2.TabIndex = 3;
@@ -222,6 +236,11 @@
             // numericUpDown1
             // 
             this.numericUpDown1.Location = new System.Drawing.Point(38, 25);
+            this.numericUpDown1.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(85, 20);
             this.numericUpDown1.TabIndex = 1;
@@ -246,22 +265,22 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Algorithm choice";
             // 
-            // radioButton2
+            // AlgorithmCommaRadio
             // 
             this.AlgorithmCommaRadio.AutoSize = true;
             this.AlgorithmCommaRadio.Location = new System.Drawing.Point(22, 47);
-            this.AlgorithmCommaRadio.Name = "radioButton2";
+            this.AlgorithmCommaRadio.Name = "AlgorithmCommaRadio";
             this.AlgorithmCommaRadio.Size = new System.Drawing.Size(45, 17);
             this.AlgorithmCommaRadio.TabIndex = 1;
             this.AlgorithmCommaRadio.Text = "μ , λ";
             this.AlgorithmCommaRadio.UseVisualStyleBackColor = true;
             // 
-            // radioButton1
+            // AlgorithmPlusRadio
             // 
             this.AlgorithmPlusRadio.AutoSize = true;
             this.AlgorithmPlusRadio.Checked = true;
             this.AlgorithmPlusRadio.Location = new System.Drawing.Point(22, 24);
-            this.AlgorithmPlusRadio.Name = "radioButton1";
+            this.AlgorithmPlusRadio.Name = "AlgorithmPlusRadio";
             this.AlgorithmPlusRadio.Size = new System.Drawing.Size(48, 17);
             this.AlgorithmPlusRadio.TabIndex = 0;
             this.AlgorithmPlusRadio.TabStop = true;
@@ -279,7 +298,6 @@
             this.MinimumSize = new System.Drawing.Size(400, 300);
             this.Name = "MainForm";
             this.Text = "Travelling Salesman Problem";
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
