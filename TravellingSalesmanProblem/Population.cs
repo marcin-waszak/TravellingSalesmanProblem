@@ -45,10 +45,10 @@ namespace TravellingSalesmanProblem
             var newPopulation = new Population(_size);
             for (var i = 0; i < _size; i++)
             {
-                var parent1 = SelectParent(this);
-                var parent2 = SelectParent(this);
+                var parent1 = SelectParent();
+                var parent2 = SelectParent();
                 var child = parent1.Crossover(parent2);
-                newPopulation.Tours[i] = child;
+                newPopulation.Tours.Add(child);
             }
             return newPopulation;
         }
@@ -70,13 +70,13 @@ namespace TravellingSalesmanProblem
             }
         }
 
-        private Tour SelectParent(Population population)
+        private Tour SelectParent()
         {
             var tournament = new Population(TournamentSize);
-
-            for (var i = 0; i < TournamentSize; i++) {
-                var randomIdx = _random.Next(population._size);
-                tournament.Tours.Insert(i, population.Tours[randomIdx]);
+            for (var i = 0; i < TournamentSize; i++)
+            {
+                var randomIdx = _random.Next(_size);
+                tournament.Tours.Add(Tours[randomIdx]);
             }
             return tournament.GetFittest();
         }

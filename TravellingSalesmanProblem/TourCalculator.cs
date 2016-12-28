@@ -41,9 +41,7 @@ namespace TravellingSalesmanProblem
                 };
 
                 // 3. reprodukuj z T lambda-elementowa populacje potomna R stosujac krzyzowanie i mutacje
-                // TODO fix crossing over
-//                var repPopulation = tempPopulation.Crossover();
-                var repPopulation = tempPopulation;
+                var repPopulation = tempPopulation.Crossover();
                 repPopulation.Mutate();
                 // 4. utworz P jako mi osobnikow wybranych z P i R
                 Population populationToChoose;
