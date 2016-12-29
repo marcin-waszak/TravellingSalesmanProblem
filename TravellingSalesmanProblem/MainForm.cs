@@ -50,7 +50,10 @@ namespace TravellingSalesmanProblem
 
             InitializeComponent();
 
-            //Example points to connect
+            // Vertical dotted line bugfix
+            AlgorithmPlusRadio.Select();
+
+            // Example points to connect
             _draw_edge_points.Add(0);
             _draw_edge_points.Add(1);
             _draw_edge_points.Add(2);
