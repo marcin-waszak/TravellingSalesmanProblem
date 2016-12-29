@@ -98,7 +98,12 @@ namespace TravellingSalesmanProblem
 
             // Draw lines onto the Panel1
             Pen blackPen = new Pen(Color.Black, 1);
-            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+
+            if (enableAntialiasingToolStripMenuItem.Checked)
+                e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+            else
+                e.Graphics.SmoothingMode = SmoothingMode.None;
+
             e.Graphics.DrawLines(blackPen, points);
 
             // Draw points onto the Panel1
@@ -227,5 +232,16 @@ namespace TravellingSalesmanProblem
             groupBox1.Enabled = true;
             groupBox2.Enabled = true;
         }
+
+        private void enableAntialiasingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (enableAntialiasingToolStripMenuItem.Checked)
+                enableAntialiasingToolStripMenuItem.Checked = false;
+            else
+                enableAntialiasingToolStripMenuItem.Checked = true;
+
+            splitContainer1.Panel1.Invalidate();
+        }
+        
     }
 }
