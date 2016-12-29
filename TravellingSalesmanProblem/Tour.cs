@@ -26,7 +26,7 @@ namespace TravellingSalesmanProblem
             return 1 / GetDistance();
         }
 
-        private double GetDistance()
+        public double GetDistance()
         {
             double distance = 0;
             for (var i = 0; i < Cities.Count; i++)

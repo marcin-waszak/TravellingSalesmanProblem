@@ -34,11 +34,11 @@ namespace TravellingSalesmanProblem
             _towns = new BindingList<City>();
         }
 
-        public static void Algorithm(AlgorithmType algorithmTypeType, int mi, int lambda,
+        public static Tour Algorithm(AlgorithmType algorithmTypeType, int mi, int lambda,
             int numberOfTowns, IList<City> towns)
         {
             var tourCalculator = new TourCalculator(algorithmTypeType, mi, lambda, numberOfTowns, towns);
-            tourCalculator.Run();
+            return tourCalculator.Run();
         }
     }
 }

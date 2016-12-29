@@ -99,7 +99,11 @@ namespace TravellingSalesmanProblem
             ChangeStart();
 
             // TODO change it to async and apply listener
-            Program.Algorithm(_algorithmType, mi_, lambda_, n_, towns_);
+            var resultTour = Program.Algorithm(_algorithmType, mi_, lambda_, n_, towns_);
+
+            // TODO remove it later:
+            resultTour.GetDistance();
+
             /*
                 TODO Run the tourCalculator in another thread and request it status and progress
                 while (GetAlgorithmStatus != FINISHED)
@@ -109,6 +113,8 @@ namespace TravellingSalesmanProblem
                 }
 
             */
+            // TODO after the result is simulated and displayed go back to the initial state:
+            ChangeFinish();
         }
 
         public void ChangeStart()
