@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -37,15 +38,34 @@ namespace TravellingSalesmanProblem
             }
         }
 
+        private struct DrawEdgePoints
+        {
+            public int IndexA { get; private set; }
+
+            public DrawEdgePoints(int index_a)
+            {
+                IndexA = index_a;
+            }
+        }
+
         private BindingList<DrawPoint> _draw_points;
+        private BindingList<int> _draw_edge_points;
 
         public MainForm(ref TownCollection towns)
         {
             _towns = towns;
             _draw_towns = new TownCollection();
             _draw_points = new BindingList<DrawPoint>();
+            _draw_edge_points = new BindingList<int>();
 
             InitializeComponent();
+
+            ////
+            _draw_edge_points.Add(0);
+            _draw_edge_points.Add(1);
+            _draw_edge_points.Add(2);
+            _draw_edge_points.Add(33);
+            _draw_edge_points.Add(0);
         }
 
         private void ReadSettings()
@@ -64,10 +84,28 @@ namespace TravellingSalesmanProblem
         {
             ScaleList();
 
+            if (_draw_points.Count < 1)
+                return;
+
+            PointF[] points = new PointF[_draw_edge_points.Count];
+
+            for (int i = 0; i < _draw_edge_points.Count; ++i)
+            {
+                float x = _draw_points[_draw_edge_points[i]].X;
+                float y = _draw_points[_draw_edge_points[i]].Y;
+                points[i] = new PointF(x, y);
+            }
+
+            // Draw lines onto the Panel1
+            Pen blackPen = new Pen(Color.Black, 1);
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+            e.Graphics.DrawLines(blackPen, points);
+
+            // Draw points onto the Panel1
             for (int i = 0; i < _draw_points.Count; ++i)
             {
-                float x = _draw_points[i].X;
-                float y = _draw_points[i].Y;
+                float x = _draw_points[i].X - DotSize / 2.0f;
+                float y = _draw_points[i].Y - DotSize / 2.0f;
                 e.Graphics.FillRectangle(Brushes.Red, x, y, DotSize, DotSize);
             }
         }
@@ -156,8 +194,6 @@ namespace TravellingSalesmanProblem
 
                 x *= scale;
                 y *= scale;
-                x += -DotSize / 2.0f;
-                y += -DotSize / 2.0f;
 
                 string name = _draw_towns[i].Name;
                 _draw_points.Add(new DrawPoint(name, x, y));
