@@ -15,11 +15,11 @@ namespace TravellingSalesmanProblem
         public float MinLongitude { get; private set; }
         public int Count { get; private set; }
 
-        private BindingList<Town> _towns;
+        private List<Town> _towns;
 
         public TownCollection()
         {
-            _towns = new BindingList<Town>();
+            _towns = new List<Town>();
             MaxLatitude = float.MinValue;
             MinLatitude = float.MaxValue;
             MaxLongitude = float.MinValue;

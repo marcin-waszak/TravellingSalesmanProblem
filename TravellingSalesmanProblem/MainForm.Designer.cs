@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.enableAntialiasingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
@@ -51,8 +51,6 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.AlgorithmCommaRadio = new System.Windows.Forms.RadioButton();
             this.AlgorithmPlusRadio = new System.Windows.Forms.RadioButton();
-            this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.enableAntialiasingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -65,12 +63,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // timer1
-            // 
-            this.timer1.Enabled = true;
-            this.timer1.Interval = 16;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // menuStrip1
             // 
@@ -98,6 +90,23 @@
             this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.openToolStripMenuItem.Text = "&Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
+            // 
+            // viewToolStripMenuItem
+            // 
+            this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.enableAntialiasingToolStripMenuItem});
+            this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
+            this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.viewToolStripMenuItem.Text = "&View";
+            // 
+            // enableAntialiasingToolStripMenuItem
+            // 
+            this.enableAntialiasingToolStripMenuItem.Checked = true;
+            this.enableAntialiasingToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.enableAntialiasingToolStripMenuItem.Name = "enableAntialiasingToolStripMenuItem";
+            this.enableAntialiasingToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.enableAntialiasingToolStripMenuItem.Text = "Enable &Antialiasing";
+            this.enableAntialiasingToolStripMenuItem.Click += new System.EventHandler(this.enableAntialiasingToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -290,23 +299,6 @@
             this.AlgorithmPlusRadio.Text = "μ + λ";
             this.AlgorithmPlusRadio.UseVisualStyleBackColor = true;
             // 
-            // viewToolStripMenuItem
-            // 
-            this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.enableAntialiasingToolStripMenuItem});
-            this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
-            this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.viewToolStripMenuItem.Text = "&View";
-            // 
-            // enableAntialiasingToolStripMenuItem
-            // 
-            this.enableAntialiasingToolStripMenuItem.Checked = true;
-            this.enableAntialiasingToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.enableAntialiasingToolStripMenuItem.Name = "enableAntialiasingToolStripMenuItem";
-            this.enableAntialiasingToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
-            this.enableAntialiasingToolStripMenuItem.Text = "Enable &Antialiasing";
-            this.enableAntialiasingToolStripMenuItem.Click += new System.EventHandler(this.enableAntialiasingToolStripMenuItem_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -339,8 +331,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;

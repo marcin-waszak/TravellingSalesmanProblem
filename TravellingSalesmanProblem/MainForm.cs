@@ -38,29 +38,22 @@ namespace TravellingSalesmanProblem
             }
         }
 
-        private struct DrawEdgePoints
-        {
-            public int IndexA { get; private set; }
-
-            public DrawEdgePoints(int index_a)
-            {
-                IndexA = index_a;
-            }
-        }
-
-        private BindingList<DrawPoint> _draw_points;
-        private BindingList<int> _draw_edge_points;
+        private List<DrawPoint> _draw_points;
+        private List<int> _draw_edge_points;
 
         public MainForm(ref TownCollection towns)
         {
             _towns = towns;
             _draw_towns = new TownCollection();
-            _draw_points = new BindingList<DrawPoint>();
-            _draw_edge_points = new BindingList<int>();
+            _draw_points = new List<DrawPoint>();
+            _draw_edge_points = new List<int>();
 
             InitializeComponent();
 
-            ////
+            // Vertical dotted line bugfix
+            AlgorithmPlusRadio.Select();
+
+            // Example points to connect
             _draw_edge_points.Add(0);
             _draw_edge_points.Add(1);
             _draw_edge_points.Add(2);
@@ -113,11 +106,6 @@ namespace TravellingSalesmanProblem
                 float y = _draw_points[i].Y - DotSize / 2.0f;
                 e.Graphics.FillRectangle(Brushes.Red, x, y, DotSize, DotSize);
             }
-        }
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
