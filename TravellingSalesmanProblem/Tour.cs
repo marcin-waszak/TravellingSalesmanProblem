@@ -12,11 +12,6 @@ namespace TravellingSalesmanProblem
             Cities = new List<City>();
         }
 
-        public Tour(int size)
-        {
-            Cities = new List<City>(size);
-        }
-
         public Tour(IList<City> cities)
         {
             Cities = new List<City>();
@@ -48,10 +43,9 @@ namespace TravellingSalesmanProblem
             Cities.Shuffle();
         }
 
-        // TODO check it, it is just a dummy implementation
         public Tour Crossover(Tour parent2)
         {
-            var child = new Tour(Cities.Count);
+            var child = new Tour();
             var random = new Random();
 
             var startPos = random.Next(Cities.Count);
@@ -59,20 +53,33 @@ namespace TravellingSalesmanProblem
 
             for (var i = 0; i < Cities.Count; i++)
             {
-                if (startPos <= endPos && i >= startPos && i <= endPos)
+                child.Cities.Insert(i, null);
+            }
+
+            for (var i = 0; i < Cities.Count; i++)
+            {
+                if (startPos < endPos && i > startPos && i < endPos)
                 {
-                    child.Cities.Add(Cities[i]);
+                    child.Cities[i] = Cities[i];
                 }
                 else if (startPos > endPos)
                 {
-                    if (i >= startPos || i <= endPos)
+                    if (!(i < startPos && i > endPos))
                     {
-                        child.Cities.Add(Cities[i]);
+                        child.Cities[i] = Cities[i];
                     }
                 }
-                else
+            }
+
+            for (var i = 0; i < parent2.Cities.Count; i++)
+            {
+                if (child.Cities.Contains(parent2.Cities[i])) continue;
+
+                for (var ii = 0; ii < Cities.Count; ii++)
                 {
-                    child.Cities.Add(parent2.Cities[i]);
+                    if (child.Cities[ii] != null) continue;
+                    child.Cities[ii] = parent2.Cities[i];
+                    break;
                 }
             }
 
