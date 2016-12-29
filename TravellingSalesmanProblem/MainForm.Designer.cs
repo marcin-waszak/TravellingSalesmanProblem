@@ -51,6 +51,8 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.AlgorithmCommaRadio = new System.Windows.Forms.RadioButton();
             this.AlgorithmPlusRadio = new System.Windows.Forms.RadioButton();
+            this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.enableAntialiasingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -74,6 +76,7 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
+            this.viewToolStripMenuItem,
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -287,6 +290,23 @@
             this.AlgorithmPlusRadio.Text = "μ + λ";
             this.AlgorithmPlusRadio.UseVisualStyleBackColor = true;
             // 
+            // viewToolStripMenuItem
+            // 
+            this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.enableAntialiasingToolStripMenuItem});
+            this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
+            this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.viewToolStripMenuItem.Text = "&View";
+            // 
+            // enableAntialiasingToolStripMenuItem
+            // 
+            this.enableAntialiasingToolStripMenuItem.Checked = true;
+            this.enableAntialiasingToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.enableAntialiasingToolStripMenuItem.Name = "enableAntialiasingToolStripMenuItem";
+            this.enableAntialiasingToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.enableAntialiasingToolStripMenuItem.Text = "Enable &Antialiasing";
+            this.enableAntialiasingToolStripMenuItem.Click += new System.EventHandler(this.enableAntialiasingToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -342,6 +362,8 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem enableAntialiasingToolStripMenuItem;
     }
 }
 
