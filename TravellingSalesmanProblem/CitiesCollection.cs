@@ -14,12 +14,11 @@ namespace TravellingSalesmanProblem
         public float MaxLongitude { get; private set; }
         public float MinLongitude { get; private set; }
         public int Count { get; private set; }
-
-        private List<City> _towns;
+        public List<City> Towns { get; }
 
         public CitiesCollection()
         {
-            _towns = new List<City>();
+            Towns = new List<City>();
             MaxLatitude = float.MinValue;
             MinLatitude = float.MaxValue;
             MaxLongitude = float.MinValue;
@@ -33,8 +32,8 @@ namespace TravellingSalesmanProblem
 
         public void Add(string name, float latitude, float longitude)
         {
-            _towns.Add(new City(name, latitude, longitude));
-            Count = _towns.Count;
+            Towns.Add(new City(name, latitude, longitude));
+            Count = Towns.Count;
 
             MaxLatitude = Math.Max(latitude, MaxLatitude);
             MinLatitude = Math.Min(latitude, MinLatitude);
@@ -44,8 +43,8 @@ namespace TravellingSalesmanProblem
 
         public void FlipLatitude()
         {
-            for (int i = 0; i < _towns.Count; ++i)
-                _towns[i].Latitude *= -1.0f;
+            for (int i = 0; i < Towns.Count; ++i)
+                Towns[i].Latitude *= -1.0f;
 
             float temp = MaxLatitude;
             MaxLatitude = -MinLatitude;
@@ -54,10 +53,10 @@ namespace TravellingSalesmanProblem
 
         public void CancelOffset()
         {
-            for (int i = 0; i < _towns.Count; ++i)
+            for (int i = 0; i < Towns.Count; ++i)
             {
-                _towns[i].Latitude -= MinLatitude;
-                _towns[i].Longitude -= MinLongitude;
+                Towns[i].Latitude -= MinLatitude;
+                Towns[i].Longitude -= MinLongitude;
             }
 
             MaxLongitude -= MinLongitude;
@@ -68,8 +67,8 @@ namespace TravellingSalesmanProblem
 
         public void ScaleLatitude(float scale)
         {
-            for (int i = 0; i < _towns.Count; ++i)
-                _towns[i].Latitude *= scale;
+            for (int i = 0; i < Towns.Count; ++i)
+                Towns[i].Latitude *= scale;
 
             MinLatitude *= scale;
             MaxLatitude *= scale;
@@ -77,18 +76,18 @@ namespace TravellingSalesmanProblem
 
         public void Clear()
         {
-            _towns.Clear();
+            Towns.Clear();
         }
 
         public City this[int key]
         {
             get
             {
-                return _towns[key];
+                return Towns[key];
             }
             set
             {
-                _towns[key] = value;
+                Towns[key] = value;
             }
         }
     };

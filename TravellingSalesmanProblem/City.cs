@@ -9,9 +9,9 @@ namespace TravellingSalesmanProblem
 {
     public class City
     {
-        public string Name { get; }
-        public double Latitude { get; }
-        public double Longitude { get; }
+        public string Name { get; set; }
+        public float Latitude { get; set; }
+        public float Longitude { get; set; }
 
         public City(string name, float latitude, float longitude)
         {
@@ -49,6 +49,7 @@ namespace TravellingSalesmanProblem
 
         private static float Deg(float input)
         {
-            return input * 180.0f / (float)Math.PI;
+            return input * 180.0f / (float) Math.PI;
+        }
     }
 }

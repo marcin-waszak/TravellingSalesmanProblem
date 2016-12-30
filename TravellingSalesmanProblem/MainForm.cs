@@ -52,13 +52,6 @@ namespace TravellingSalesmanProblem
 
             // Vertical dotted line bugfix
             AlgorithmPlusRadio.Select();
-
-            // Example points to connect
-            _draw_edge_points.Add(0);
-            _draw_edge_points.Add(1);
-            _draw_edge_points.Add(2);
-            _draw_edge_points.Add(33);
-            _draw_edge_points.Add(0);
         }
 
         private void ReadSettings()
@@ -151,25 +144,19 @@ namespace TravellingSalesmanProblem
             ReadSettings();
             ChangeStart();
 
-            // TODO change it to async and apply listener
             var resultTour = Program.Algorithm(_algorithmType, _mi, _lambda, _n, _cities.Towns);
 
-            // TODO remove it later:
-            resultTour.GetDistance();
-
-            /*
-                TODO Run the tourCalculator in another thread and request it status and progress
-                while (GetAlgorithmStatus != FINISHED)
-                {
-                    List<City> townsBeingVisitedNow = GetAlgorithmProgress();
-                    DrawTowns(townsBeingVisitedNow);
-                }
-
-            */
-            // TODO after the result is simulated and displayed go back to the initial state:
-            ChangeFinish();
+            int? firstIdx = null;
+            foreach (var city in resultTour.Cities)
+            {
+                var idx = _cities.Towns.FindIndex(town => town.Name.Equals(city.Name));
+                firstIdx = firstIdx ?? idx;
+                _draw_edge_points.Add(idx);
+            }
+            _draw_edge_points.Add(_cities.Towns.FindIndex(town => town.Name.Equals(resultTour.Cities[0].Name)));
 
             CreateList();
+            ChangeFinish();
 
             splitContainer1.Panel1.Invalidate();
         }
