@@ -9,10 +9,10 @@ namespace TravellingSalesmanProblem
 {
     static class Program
     {
-        public enum Algoritms {
+        public enum AlgorithmType {
             MiPlusLambda,
             MiCommaLambda
-        };
+        }
 
         private static CitiesCollection _cities;
 
@@ -32,6 +32,13 @@ namespace TravellingSalesmanProblem
         private static void Initialize()
         {
             _cities = new CitiesCollection();
+        }
+
+        public static Tour Algorithm(AlgorithmType algorithmTypeType, int mi, int lambda,
+            int numberOfTowns, IList<City> towns)
+        {
+            var tourCalculator = new TourCalculator(algorithmTypeType, mi, lambda, numberOfTowns, towns);
+            return tourCalculator.Run();
         }
     }
 }

@@ -14,8 +14,8 @@ namespace TravellingSalesmanProblem
 {
     public partial class MainForm : Form
     {
-        private Program.Algoritms _algorithm;
-        private int _m_;
+        private Program.AlgorithmType _algorithmType;
+        private int _mi;
         private int _lambda;
         private int _n;
 
@@ -64,11 +64,11 @@ namespace TravellingSalesmanProblem
         private void ReadSettings()
         {
             if (AlgorithmPlusRadio.Checked)
-                _algorithm = Program.Algoritms.MiPlusLambda;
+                _algorithmType = Program.AlgorithmType.MiPlusLambda;
             else if (AlgorithmCommaRadio.Checked)
-                _algorithm = Program.Algoritms.MiCommaLambda;
+                _algorithmType = Program.AlgorithmType.MiCommaLambda;
 
-            _m_ = Convert.ToInt32(numericUpDown1.Value);
+            _mi = Convert.ToInt32(numericUpDown1.Value);
             _lambda = Convert.ToInt32(numericUpDown2.Value);
             _n = Convert.ToInt32(numericUpDown3.Value);
         }
@@ -151,7 +151,23 @@ namespace TravellingSalesmanProblem
             ReadSettings();
             ChangeStart();
 
-            //Program.Algorithm();
+            // TODO change it to async and apply listener
+            var resultTour = Program.Algorithm(_algorithmType, _mi, _lambda, _n, _cities.Towns);
+
+            // TODO remove it later:
+            resultTour.GetDistance();
+
+            /*
+                TODO Run the tourCalculator in another thread and request it status and progress
+                while (GetAlgorithmStatus != FINISHED)
+                {
+                    List<City> townsBeingVisitedNow = GetAlgorithmProgress();
+                    DrawTowns(townsBeingVisitedNow);
+                }
+
+            */
+            // TODO after the result is simulated and displayed go back to the initial state:
+            ChangeFinish();
 
             CreateList();
 

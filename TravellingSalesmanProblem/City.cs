@@ -9,9 +9,9 @@ namespace TravellingSalesmanProblem
 {
     public class City
     {
-        public string Name { get; set; }
-        public float Latitude { get; set; }
-        public float Longitude { get; set; }
+        public string Name { get; }
+        public double Latitude { get; }
+        public double Longitude { get; }
 
         public City(string name, float latitude, float longitude)
         {
@@ -27,8 +27,13 @@ namespace TravellingSalesmanProblem
             Longitude = float.Parse(input[2], CultureInfo.InvariantCulture);
         }
 
-        // Static methods
+        public double GetDistanceTo(City target)
+        {
+            return Distance(this, target);
 
+        }
+
+        // Static methods
         public static float Distance(City a, City b)
         {
             const float km_per_degree = 111.196672f;
@@ -45,6 +50,5 @@ namespace TravellingSalesmanProblem
         private static float Deg(float input)
         {
             return input * 180.0f / (float)Math.PI;
-        }
     }
 }
