@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TravellingSalesmanProblem
 {
-    public class TownCollection
+    public class CitiesCollection
     {
         public float MaxLatitude { get; private set; }
         public float MinLatitude { get; private set; }
@@ -15,25 +15,25 @@ namespace TravellingSalesmanProblem
         public float MinLongitude { get; private set; }
         public int Count { get; private set; }
 
-        private List<Town> _towns;
+        private List<City> _towns;
 
-        public TownCollection()
+        public CitiesCollection()
         {
-            _towns = new List<Town>();
+            _towns = new List<City>();
             MaxLatitude = float.MinValue;
             MinLatitude = float.MaxValue;
             MaxLongitude = float.MinValue;
             MinLongitude = float.MaxValue;
         }
 
-        public void Add(Town town)
+        public void Add(City city)
         {
-            Add(town.Name, town.Latitude, town.Longitude);
+            Add(city.Name, city.Latitude, city.Longitude);
         }
 
         public void Add(string name, float latitude, float longitude)
         {
-            _towns.Add(new Town(name, latitude, longitude));
+            _towns.Add(new City(name, latitude, longitude));
             Count = _towns.Count;
 
             MaxLatitude = Math.Max(latitude, MaxLatitude);
@@ -80,7 +80,7 @@ namespace TravellingSalesmanProblem
             _towns.Clear();
         }
 
-        public Town this[int key]
+        public City this[int key]
         {
             get
             {

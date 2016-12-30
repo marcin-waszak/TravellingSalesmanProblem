@@ -66,8 +66,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TownCollection.cs" />
-    <Compile Include="Town.cs" />
+    <Compile Include="CitiesCollection.cs" />
+    <Compile Include="City.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

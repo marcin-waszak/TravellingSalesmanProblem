@@ -19,8 +19,8 @@ namespace TravellingSalesmanProblem
         private int _lambda;
         private int _n;
 
-        private TownCollection _towns;
-        private TownCollection _draw_towns;
+        private CitiesCollection _cities;
+        private CitiesCollection _drawCities;
 
         private const float DotSize = 6.0f;
 
@@ -41,10 +41,10 @@ namespace TravellingSalesmanProblem
         private List<DrawPoint> _draw_points;
         private List<int> _draw_edge_points;
 
-        public MainForm(ref TownCollection towns)
+        public MainForm(ref CitiesCollection cities)
         {
-            _towns = towns;
-            _draw_towns = new TownCollection();
+            _cities = cities;
+            _drawCities = new CitiesCollection();
             _draw_points = new List<DrawPoint>();
             _draw_edge_points = new List<int>();
 
@@ -128,14 +128,14 @@ namespace TravellingSalesmanProblem
         private void ParseFile()
         {
             StreamReader my_reader = new StreamReader(openFileDialog1.FileName);
-            _towns = new TownCollection();
+            _cities = new CitiesCollection();
 
             while (!my_reader.EndOfStream)
             {
                 var line = my_reader.ReadLine();
                 var values = line.Split(';');
 
-                _towns.Add(new Town(values));
+                _cities.Add(new City(values));
             }
 
             my_reader.Close();
@@ -160,11 +160,11 @@ namespace TravellingSalesmanProblem
 
         private void ScaleList()
         {
-            float min_longitude = _draw_towns.MinLongitude;
-            float min_latitude = _draw_towns.MinLatitude;
+            float min_longitude = _drawCities.MinLongitude;
+            float min_latitude = _drawCities.MinLatitude;
 
-            float delta_longitude = _draw_towns.MaxLongitude - min_longitude;
-            float delta_latitude = _draw_towns.MaxLatitude - min_latitude;
+            float delta_longitude = _drawCities.MaxLongitude - min_longitude;
+            float delta_latitude = _drawCities.MaxLatitude - min_latitude;
             float points_ratio = delta_longitude / delta_latitude;
 
             float panel_width = splitContainer1.Panel1.Width;
@@ -180,29 +180,29 @@ namespace TravellingSalesmanProblem
 
             _draw_points.Clear();
 
-            for (int i = 0; i < _n && i < _draw_towns.Count; ++i)
+            for (int i = 0; i < _n && i < _drawCities.Count; ++i)
             {
-                float x = _draw_towns[i].Longitude - _draw_towns.MinLongitude;
-                float y = _draw_towns[i].Latitude - _draw_towns.MinLatitude;
+                float x = _drawCities[i].Longitude - _drawCities.MinLongitude;
+                float y = _drawCities[i].Latitude - _drawCities.MinLatitude;
 
                 x *= scale;
                 y *= scale;
 
-                string name = _draw_towns[i].Name;
+                string name = _drawCities[i].Name;
                 _draw_points.Add(new DrawPoint(name, x, y));
             }
         }
 
         private void CreateList()
         {
-            _draw_towns.Clear();
+            _drawCities.Clear();
 
-            for (int i = 0; i < _n && i < _towns.Count; ++i)
-                _draw_towns.Add(_towns[i].Name, _towns[i].Latitude, _towns[i].Longitude);
+            for (int i = 0; i < _n && i < _cities.Count; ++i)
+                _drawCities.Add(_cities[i].Name, _cities[i].Latitude, _cities[i].Longitude);
 
-            _draw_towns.FlipLatitude();
-            _draw_towns.CancelOffset();
-            _draw_towns.ScaleLatitude(1.6f); // 1.6 ~ 1/cos(52 deg), latitude correction
+            _drawCities.FlipLatitude();
+            _drawCities.CancelOffset();
+            _drawCities.ScaleLatitude(1.6f); // 1.6 ~ 1/cos(52 deg), latitude correction
         }
 
         public void ChangeStart()

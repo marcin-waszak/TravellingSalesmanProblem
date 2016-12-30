@@ -7,20 +7,20 @@ using System.Threading.Tasks;
 
 namespace TravellingSalesmanProblem
 {
-    public class Town
+    public class City
     {
         public string Name { get; set; }
         public float Latitude { get; set; }
         public float Longitude { get; set; }
 
-        public Town(string name, float latitude, float longitude)
+        public City(string name, float latitude, float longitude)
         {
             Name = name;
             Latitude = latitude;
             Longitude = longitude;
         }
 
-        public Town(string[] input)
+        public City(string[] input)
         {
             Name = input[0];
             Latitude = float.Parse(input[1], CultureInfo.InvariantCulture);
@@ -29,7 +29,7 @@ namespace TravellingSalesmanProblem
 
         // Static methods
 
-        public static float Distance(Town a, Town b)
+        public static float Distance(City a, City b)
         {
             const float km_per_degree = 111.196672f;
             float delta = (float)Math.Acos(Math.Sin(Rad(a.Latitude)) * Math.Sin(Rad(b.Latitude))
