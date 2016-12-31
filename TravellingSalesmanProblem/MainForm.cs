@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.IO;
@@ -141,24 +142,32 @@ namespace TravellingSalesmanProblem
 
         private void button1_Click(object sender, EventArgs e)
         {
+
+            RunAlgorithm();
+        }
+
+        private async void RunAlgorithm()
+        {
             ReadSettings();
             ChangeStart();
-
             _draw_edge_points.Clear();
-            var resultTour = Program.Algorithm(_algorithm_type, _mi, _lambda, _n, _cities.Towns);
+
+            var resultTour = Task<Tour>.Factory.StartNew(() => Program.Algorithm(_algorithm_type, _mi, _lambda, _n, _cities.Towns));
+
+            await resultTour;
 
             int? firstIdx = null;
-            foreach (var city in resultTour.Cities)
+            foreach (var city in resultTour.Result.Cities)
             {
                 var idx = _cities.Towns.FindIndex(town => town.Name.Equals(city.Name));
                 firstIdx = firstIdx ?? idx;
                 _draw_edge_points.Add(idx);
             }
-            _draw_edge_points.Add(_cities.Towns.FindIndex(town => town.Name.Equals(resultTour.Cities[0].Name)));
+            Debug.Assert(firstIdx != null, "firstIdx != null");
+            _draw_edge_points.Add(firstIdx.Value);
 
             CreateList();
             ChangeFinish();
-
             splitContainer1.Panel1.Invalidate();
         }
 
