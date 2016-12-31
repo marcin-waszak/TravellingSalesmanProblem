@@ -14,13 +14,13 @@ namespace TravellingSalesmanProblem
 {
     public partial class MainForm : Form
     {
-        private Program.AlgorithmType _algorithmType;
+        private Program.AlgorithmType _algorithm_type;
         private int _mi;
         private int _lambda;
         private int _n;
 
         private CitiesCollection _cities;
-        private CitiesCollection _drawCities;
+        private CitiesCollection _draw_cities;
 
         private const float DotSize = 6.0f;
 
@@ -44,7 +44,7 @@ namespace TravellingSalesmanProblem
         public MainForm(ref CitiesCollection cities)
         {
             _cities = cities;
-            _drawCities = new CitiesCollection();
+            _draw_cities = new CitiesCollection();
             _draw_points = new List<DrawPoint>();
             _draw_edge_points = new List<int>();
 
@@ -57,9 +57,9 @@ namespace TravellingSalesmanProblem
         private void ReadSettings()
         {
             if (AlgorithmPlusRadio.Checked)
-                _algorithmType = Program.AlgorithmType.MiPlusLambda;
+                _algorithm_type = Program.AlgorithmType.MiPlusLambda;
             else if (AlgorithmCommaRadio.Checked)
-                _algorithmType = Program.AlgorithmType.MiCommaLambda;
+                _algorithm_type = Program.AlgorithmType.MiCommaLambda;
 
             _mi = Convert.ToInt32(numericUpDown1.Value);
             _lambda = Convert.ToInt32(numericUpDown2.Value);
@@ -144,7 +144,8 @@ namespace TravellingSalesmanProblem
             ReadSettings();
             ChangeStart();
 
-            var resultTour = Program.Algorithm(_algorithmType, _mi, _lambda, _n, _cities.Towns);
+            _draw_edge_points.Clear();
+            var resultTour = Program.Algorithm(_algorithm_type, _mi, _lambda, _n, _cities.Towns);
 
             int? firstIdx = null;
             foreach (var city in resultTour.Cities)
@@ -163,11 +164,11 @@ namespace TravellingSalesmanProblem
 
         private void ScaleList()
         {
-            float min_longitude = _drawCities.MinLongitude;
-            float min_latitude = _drawCities.MinLatitude;
+            float min_longitude = _draw_cities.MinLongitude;
+            float min_latitude = _draw_cities.MinLatitude;
 
-            float delta_longitude = _drawCities.MaxLongitude - min_longitude;
-            float delta_latitude = _drawCities.MaxLatitude - min_latitude;
+            float delta_longitude = _draw_cities.MaxLongitude - min_longitude;
+            float delta_latitude = _draw_cities.MaxLatitude - min_latitude;
             float points_ratio = delta_longitude / delta_latitude;
 
             float panel_width = splitContainer1.Panel1.Width;
@@ -183,29 +184,29 @@ namespace TravellingSalesmanProblem
 
             _draw_points.Clear();
 
-            for (int i = 0; i < _n && i < _drawCities.Count; ++i)
+            for (int i = 0; i < _draw_cities.Count; ++i)
             {
-                float x = _drawCities[i].Longitude - _drawCities.MinLongitude;
-                float y = _drawCities[i].Latitude - _drawCities.MinLatitude;
+                float x = _draw_cities[i].Longitude;
+                float y = _draw_cities[i].Latitude;
 
                 x *= scale;
                 y *= scale;
 
-                string name = _drawCities[i].Name;
+                string name = _draw_cities[i].Name;
                 _draw_points.Add(new DrawPoint(name, x, y));
             }
         }
 
         private void CreateList()
         {
-            _drawCities.Clear();
+            _draw_cities.Clear();
 
             for (int i = 0; i < _n && i < _cities.Count; ++i)
-                _drawCities.Add(_cities[i].Name, _cities[i].Latitude, _cities[i].Longitude);
+                _draw_cities.Add(_cities[i].Name, _cities[i].Latitude, _cities[i].Longitude);
 
-            _drawCities.FlipLatitude();
-            _drawCities.CancelOffset();
-            _drawCities.ScaleLatitude(1.6f); // 1.6 ~ 1/cos(52 deg), latitude correction
+            _draw_cities.FlipLatitude();
+            _draw_cities.CancelOffset();
+            _draw_cities.ScaleLatitude(1.6f); // 1.6 ~ 1/cos(52 deg), latitude correction
         }
 
         public void ChangeStart()
