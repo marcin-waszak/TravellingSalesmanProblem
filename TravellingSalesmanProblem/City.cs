@@ -27,7 +27,7 @@ namespace TravellingSalesmanProblem
             Longitude = float.Parse(input[2], CultureInfo.InvariantCulture);
         }
 
-        public double GetDistanceTo(City target)
+        public float GetDistanceTo(City target)
         {
             return Distance(this, target);
 

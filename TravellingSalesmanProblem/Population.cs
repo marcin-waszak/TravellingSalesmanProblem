@@ -81,5 +81,4 @@ namespace TravellingSalesmanProblem
             return tournament.GetFittest();
         }
     }
-
 }

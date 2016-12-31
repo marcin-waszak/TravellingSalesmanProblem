@@ -21,14 +21,14 @@ namespace TravellingSalesmanProblem
             }
         }
 
-        public double GetFitness()
+        public float GetFitness()
         {
             return 1 / GetDistance();
         }
 
-        public double GetDistance()
+        public float GetDistance()
         {
-            double distance = 0;
+            float distance = 0;
             for (var i = 0; i < Cities.Count; i++)
             {
                 var from = Cities[i];
