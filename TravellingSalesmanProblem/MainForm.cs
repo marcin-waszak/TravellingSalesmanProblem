@@ -95,7 +95,7 @@ namespace TravellingSalesmanProblem
             _n = Convert.ToInt32(numericUpDown3.Value);
         }
 
-        private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
+        private void tabPage1_Paint(object sender, PaintEventArgs e)
         {
             ScaleList();
 
@@ -196,7 +196,7 @@ namespace TravellingSalesmanProblem
 
             CreateList();
             ChangeFinish(resultTour.Result);
-            splitContainer1.Panel1.Invalidate();
+            tabPage1.Invalidate();
         }
 
         private void ScaleList()
@@ -208,8 +208,8 @@ namespace TravellingSalesmanProblem
             float delta_latitude = _draw_cities.MaxLatitude - min_latitude;
             float points_ratio = delta_longitude / delta_latitude;
 
-            float panel_width = splitContainer1.Panel1.Width;
-            float panel_height = splitContainer1.Panel1.Height;
+            float panel_width = tabPage1.Width;
+            float panel_height = tabPage1.Height;
             float panel_ratio = panel_width / panel_height;
 
             float scale = 1.0f;
@@ -271,8 +271,7 @@ namespace TravellingSalesmanProblem
             else
                 enableAntialiasingToolStripMenuItem.Checked = true;
 
-            splitContainer1.Panel1.Invalidate();
+            tabPage1.Invalidate();
         }
-        
     }
 }
