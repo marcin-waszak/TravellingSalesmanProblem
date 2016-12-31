@@ -19,10 +19,7 @@ namespace TravellingSalesmanProblem
         public CitiesCollection()
         {
             Towns = new List<City>();
-            MaxLatitude = float.MinValue;
-            MinLatitude = float.MaxValue;
-            MaxLongitude = float.MinValue;
-            MinLongitude = float.MaxValue;
+            ResetExtremes();
         }
 
         public void Add(City city)
@@ -74,9 +71,18 @@ namespace TravellingSalesmanProblem
             MaxLatitude *= scale;
         }
 
+        private void ResetExtremes()
+        {
+            MaxLatitude = float.MinValue;
+            MinLatitude = float.MaxValue;
+            MaxLongitude = float.MinValue;
+            MinLongitude = float.MaxValue;
+        }
+
         public void Clear()
         {
             Towns.Clear();
+            ResetExtremes();
         }
 
         public City this[int key]
