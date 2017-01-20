@@ -1,0 +1,40 @@
+\documentclass[11pt]{article}
+% Polish
+\usepackage[utf8]{inputenc}
+\usepackage{polski}
+\usepackage[polish]{babel}
+% Graphics
+\usepackage{graphicx}
+% Enumerating
+\usepackage{enumitem}
+% Footnote bottom
+\usepackage[bottom]{footmisc}
+% C++
+\usepackage{listings}
+\usepackage{xcolor}
+\lstset { %
+	language=C++,
+	basicstyle=\footnotesize,
+	morekeywords={event_t, event_set, event_notice, event_key},
+}
+% Title
+\title{Podstawy Sztucznej Inteligencji - Projekt \\ \large Problem Komiwojażera}
+\author{A. Białobrzeski, D. Bułak, M. Waszak}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section{Treść projektu}
+Należy wybrać N miast polskich i znaleźć najkrótszy cykl łączący je wszystkie.\\
+Odległości między miastami można znaleźć np. pod adresem
+http://www.odleglosci.pl/tabele-odleglosci.php\\
+Algorytm: genetyczny lub ewolucyjny ($\mu$+$\lambda$) i ($\mu$,$\lambda$).\\Należy ustalić w przybliżeniu najlepsze parametry działania obu algorytmów.\\
+Interfejs: pokazuje postęp procesu optymalizacji, podaje ostateczną kolejność miast.\\
+Należy sprawdzić program dla N=10, 20, 30. 
+
+
+\section{Koncepcja realizacji}
+
+
+\end{document}
