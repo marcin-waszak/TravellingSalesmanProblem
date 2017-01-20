@@ -34,7 +34,41 @@ Interfejs: pokazuje postęp procesu optymalizacji, podaje ostateczną kolejnoś�
 Należy sprawdzić program dla N=10, 20, 30. 
 
 
-\section{Koncepcja realizacji}
+\section{Relizacja}
+Program wyświetla okno graficzne, w którym wybiera się, który algorytm ma być stosowany (($\mu$+$\lambda$) albo ($\mu$,$\lambda$)), wprowadza się parametry: $\mu$, $\lambda$ i ilość miast ($n$). Po kliknięciu przycisku \i{Start} następuje wybranie $n$ miast z pliku, który zawiera nazwy miast oraz ich pozycje ($latitude$ i $longitude$), w tym momencie następuje uruchomienie algorytmu.\\
+Algorytm uruchamiany jest w innym wątku niż GUI tak, aby swoim działaniem nie blokował interakcji użytkownika z oknem.\\
+Działanie algorytmu opisano w następnym rozdziale.\\
+Algorytm zwraca obiekt typu $Tour$, który zawiera uporządkowaną od początku do końca listę miast, które komiwojażer powinien odwiedzić.\\
+Tak przygotowana lista jest wyświetlana w oknie za pomocą grafu.
 
+\section{Algorytm}
+Implementacja algorytmu znajduje się przede wszystkim w klasie TourCalculator, która to jest za niego odpowiedzialna. Po uruchomieniu metody $Run()$ tej klasy wykonane zostają następujące kroki:
+\begin{enumerate}
+\item Zainicjalizowana przekazanymi do metody miastami zostaje nowa $\mu$-elementowa populacja $initialPopulation$.
+\item Dla liczby zdefiniowanych kroków (przyjęto 100) zostają wykonane operacje reprodukcji:
+	\begin{enumerate}
+	\item Losowana jest z populacji początkowej $\lambda$-elementowapopulacja tymczasowa $tempPopulation$
+	\item Populacja tymczasowa jest \textbf{krzyżowana}, a wyniki tego krzyżowania zapisywane są w populacji zreprodukowanej $repPopulation$
+	\item Populacja zreprodukowana $repPopulation$ poddawana jest \textbf{mutacji}.
+	\item Nowa populacja początkowa ($\mu$-elementowa) dla kolejnego kroku algorytmu wybierana jest z populacji przeznaczonej do tego wyboru poprzez losowanie z niej $mi$ elementów. Populacja przeznaczona do tego losowania tworzona jest w zależności od wybranego algorytmu:
+		\begin{enumerate}
+		\item Dla $(\mu + \lambda)$ są to połączone populacje początkowa i zreprodukowana.
+		\item Dla $(\mu, \lambda)$ jest to tylko populacja zreprodukowana.
+		\end{enumerate}
+	\end{enumerate}
+	\item Po zakończeniu wszystkich zadanych iteracji zwracany jest osobnik ($Tour$) o najlepszej funkcji przystosowania, czyli najkrótszej odległości łączącej wszystkie miasta.
+\end{enumerate}
+
+\subsection{Krzyżowania}
+Krzyżowanie zaimplementowane w metodzie $Crossover$ klasy $Population$ składa się z dwóch kroków:
+\begin{enumerate}
+\item Wybranie rodziców - metoda wybora to turniej. Polega on na stworzeniu niewielkiej populacji (przyjęto 5-elementową), do której osobniki losowane są z populacji, którą krzyżujemy. Następnie z członków turnieju wybierany jest ten o najlepszej funkcji przystosowania. Tworzymy dwa turnieje i po ich rozegraniu otrzymujemy dwoje rodziców.
+\item Krzyżowanie rodziców ze sobą polega na stworzeniu nowego osobnika, którego część miast jest przeniesiona od pierwszego rodzica, a część od drugiego. Należy tutaj jednak pamiętać, że miasta nie mogą się powtarzać, więc przy przenoszeniu miast z drugiego osobnika musimy sprawdzać, czy takie miasto już w nim nie istnieje.
+\end{enumerate}
+
+\subsection{Mutacja}
+Mutacja zaimplementowana w metodzie $Mutate$ klasy $Population$ polega na zmianie kolejności niektórych miast w osobnikach w sposób losowy. Czy mutacja zachodzi dla danego miasta w osobniku czy nie wynika z wylosowanej liczby, która jeśli jest większa lub równa od czynnika $MutationRate$ to mutacja zachodzi, w przeciwnym razie nie.\\
+Jeśli okazuje się, że zachodzi wtedy losujemy drugie miasto w osobniku i zamieniamy miejscami z analizowanym.\\
+Czynnik $MutationRate$ określa prawdopodobieństwo wystąpienia mutacji i został przyjęty jako $0.015$
 
 \end{document}
