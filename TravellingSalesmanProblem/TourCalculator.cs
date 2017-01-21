@@ -32,13 +32,11 @@ namespace TravellingSalesmanProblem
             for (var i = 0; i < NumOfSteps; i++)
             {
                 // 2. wylosuj z P lambda-elementowa tymczasowa populacje T
-                var tempPopulation = new Population(Lambda)
+                var tempPopulation = new Population(Lambda);
+                for (var j = 0; j < Lambda; j++)
                 {
-                    Tours = initialPopulation.Tours
-                        .OrderBy(x => _random.Next())
-                        .Take(Lambda)
-                        .ToList()
-                };
+                    tempPopulation.Tours.Add(initialPopulation.Tours[_random.Next(Mi)]);
+                }
 
                 // 3. reprodukuj z T lambda-elementowa populacje potomna R stosujac krzyzowanie i mutacje
                 var repPopulation = tempPopulation.Crossover();
