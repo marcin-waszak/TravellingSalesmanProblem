@@ -190,15 +190,15 @@ namespace TravellingSalesmanProblem
         {
             ChangeStart();
 
-            var resultTour = Task<Tour>.Factory.StartNew(() => Program.Algorithm(_algorithm_type, _mi, _lambda, _n, _cities.Towns));
-            await resultTour;
+            var progress_indicator = new Progress<int>(SetProgress);
+            var result_tour = await Program.Algorithm(_algorithm_type, _mi, _lambda, _n, _cities.Towns, progress_indicator);
 
             _draw_edge_points.Clear();
             listView1.Items.Clear();
 
             int i = 0;
             int? firstIdx = null;
-            foreach (var city in resultTour.Result.Cities)
+            foreach (var city in result_tour.Cities)
             {
                 var idx = _cities.Towns.FindIndex(town => town.Name.Equals(city.Name));
                 firstIdx = firstIdx ?? idx;
@@ -219,7 +219,7 @@ namespace TravellingSalesmanProblem
             _draw_edge_points.Add(firstIdx.Value);
 
             CreateList();
-            ChangeFinish(resultTour.Result);
+            ChangeFinish(result_tour);
             tabPage1.Invalidate();
         }
 
@@ -273,6 +273,7 @@ namespace TravellingSalesmanProblem
         public void SetProgress(int progress)
         {
             toolStripProgressBar1.Value = progress;
+            label4.Text = "Status: Working (" + progress + "%)";
         }
 
         public void ChangeStart()
@@ -281,6 +282,7 @@ namespace TravellingSalesmanProblem
             button1.Enabled = false;
             groupBox1.Enabled = false;
             groupBox2.Enabled = false;
+            SetProgress(0);
             toolStripProgressBar1.Visible = true;
         }
 

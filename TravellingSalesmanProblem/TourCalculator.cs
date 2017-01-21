@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace TravellingSalesmanProblem
 {
@@ -23,43 +24,50 @@ namespace TravellingSalesmanProblem
             NumOfCities = numOfCities;
             Cities = cities.Take(numOfCities).ToList();
         }
-
-        public Tour Run()
+        
+        public async Task<Tour> Run(IProgress<int> progress)
         {
-            // 1. wygeneruj P - populacje mi osobnikow
-            var initialPopulation = new Population(Mi);
-            initialPopulation.Initialize(Cities);
-            for (var i = 0; i < NumOfSteps; i++)
+            Tour result_tour = await Task.Run<Tour>(() =>
             {
-                // 2. wylosuj z P lambda-elementowa tymczasowa populacje T
-                var tempPopulation = new Population(Lambda);
-                for (var j = 0; j < Lambda; j++)
+                // 1. wygeneruj P - populacje mi osobnikow
+                var initialPopulation = new Population(Mi);
+                initialPopulation.Initialize(Cities);
+                for (var i = 0; i < NumOfSteps; i++)
                 {
-                    tempPopulation.Tours.Add(initialPopulation.Tours[_random.Next(Mi)]);
-                }
-
-                // 3. reprodukuj z T lambda-elementowa populacje potomna R stosujac krzyzowanie i mutacje
-                var repPopulation = tempPopulation.Crossover();
-                repPopulation.Mutate();
-                // 4. utworz P jako mi osobnikow wybranych z P i R
-                Population populationToChoose;
-                if (AlgorithmType == Program.AlgorithmType.MiPlusLambda)
-                {
-                    populationToChoose = new Population(Mi + Lambda)
+                    // 2. wylosuj z P lambda-elementowa tymczasowa populacje T
+                    var tempPopulation = new Population(Lambda);
+                    for (var j = 0; j < Lambda; j++)
                     {
-                        Tours = initialPopulation.Tours.Concat(repPopulation.Tours).ToList()
-                    };
+                        tempPopulation.Tours.Add(initialPopulation.Tours[_random.Next(Mi)]);
+                    }
+
+                    // 3. reprodukuj z T lambda-elementowa populacje potomna R stosujac krzyzowanie i mutacje
+                    var repPopulation = tempPopulation.Crossover();
+                    repPopulation.Mutate();
+                    // 4. utworz P jako mi osobnikow wybranych z P i R
+                    Population populationToChoose;
+                    if (AlgorithmType == Program.AlgorithmType.MiPlusLambda)
+                    {
+                        populationToChoose = new Population(Mi + Lambda)
+                        {
+                            Tours = initialPopulation.Tours.Concat(repPopulation.Tours).ToList()
+                        };
+                    }
+                    else
+                    {
+                        populationToChoose = repPopulation;
+                    }
+                    initialPopulation.Tours = populationToChoose.Tours
+                        .OrderBy(x => _random.Next())
+                        .Take(Mi)
+                        .ToList();
+
+                    if (progress != null)
+                        progress.Report(i * 100 / NumOfSteps);
                 }
-                else
-                {
-                    populationToChoose = repPopulation;
-                }
-                initialPopulation.Tours = populationToChoose.Tours
-                    .OrderBy(x => _random.Next())
-                    .Take(Mi)
-                    .ToList();
-            }
-            return initialPopulation.GetFittest();
+                return initialPopulation.GetFittest();
+            });
+            return result_tour;
         }
     }
 }

@@ -252,7 +252,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(22, 59);
+            this.button1.Location = new System.Drawing.Point(16, 59);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 1;
@@ -263,7 +263,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(19, 25);
+            this.label4.Location = new System.Drawing.Point(13, 25);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(74, 13);
             this.label4.TabIndex = 0;
@@ -286,7 +286,7 @@
             // 
             // numericUpDown3
             // 
-            this.numericUpDown3.Location = new System.Drawing.Point(38, 77);
+            this.numericUpDown3.Location = new System.Drawing.Point(32, 77);
             this.numericUpDown3.Maximum = new decimal(new int[] {
             1000000,
             0,
@@ -299,7 +299,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(19, 77);
+            this.label3.Location = new System.Drawing.Point(13, 77);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(13, 13);
             this.label3.TabIndex = 4;
@@ -307,7 +307,7 @@
             // 
             // numericUpDown2
             // 
-            this.numericUpDown2.Location = new System.Drawing.Point(38, 51);
+            this.numericUpDown2.Location = new System.Drawing.Point(32, 51);
             this.numericUpDown2.Maximum = new decimal(new int[] {
             1000000,
             0,
@@ -320,7 +320,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(19, 51);
+            this.label2.Location = new System.Drawing.Point(13, 51);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(12, 13);
             this.label2.TabIndex = 2;
@@ -328,7 +328,7 @@
             // 
             // numericUpDown1
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(38, 25);
+            this.numericUpDown1.Location = new System.Drawing.Point(32, 25);
             this.numericUpDown1.Maximum = new decimal(new int[] {
             1000000,
             0,
@@ -341,7 +341,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(19, 25);
+            this.label1.Location = new System.Drawing.Point(13, 25);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(13, 13);
             this.label1.TabIndex = 0;
@@ -361,7 +361,7 @@
             // AlgorithmCommaRadio
             // 
             this.AlgorithmCommaRadio.AutoSize = true;
-            this.AlgorithmCommaRadio.Location = new System.Drawing.Point(22, 47);
+            this.AlgorithmCommaRadio.Location = new System.Drawing.Point(16, 47);
             this.AlgorithmCommaRadio.Name = "AlgorithmCommaRadio";
             this.AlgorithmCommaRadio.Size = new System.Drawing.Size(45, 17);
             this.AlgorithmCommaRadio.TabIndex = 1;
@@ -372,7 +372,7 @@
             // 
             this.AlgorithmPlusRadio.AutoSize = true;
             this.AlgorithmPlusRadio.Checked = true;
-            this.AlgorithmPlusRadio.Location = new System.Drawing.Point(22, 24);
+            this.AlgorithmPlusRadio.Location = new System.Drawing.Point(16, 24);
             this.AlgorithmPlusRadio.Name = "AlgorithmPlusRadio";
             this.AlgorithmPlusRadio.Size = new System.Drawing.Size(48, 17);
             this.AlgorithmPlusRadio.TabIndex = 0;
@@ -404,6 +404,7 @@
             this.toolStripProgressBar1.Margin = new System.Windows.Forms.Padding(1, 3, 12, 3);
             this.toolStripProgressBar1.Name = "toolStripProgressBar1";
             this.toolStripProgressBar1.Size = new System.Drawing.Size(120, 16);
+            this.toolStripProgressBar1.Step = 1;
             this.toolStripProgressBar1.Visible = false;
             // 
             // MainForm
