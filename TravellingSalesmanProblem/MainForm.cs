@@ -15,6 +15,8 @@ namespace TravellingSalesmanProblem
 {
     public partial class MainForm : Form
     {
+        private const string FormText = "Travelling Salesman Problem";
+
         private Program.AlgorithmType _algorithm_type;
         private int _mi;
         private int _lambda;
@@ -49,6 +51,8 @@ namespace TravellingSalesmanProblem
 
         public MainForm(ref CitiesCollection cities)
         {
+            Text = FormText;
+
             _cities = cities;
             _draw_cities = new CitiesCollection();
             _draw_points = new List<DrawPoint>();
@@ -153,6 +157,8 @@ namespace TravellingSalesmanProblem
         private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
         {
             ParseFile();
+            string file = openFileDialog1.FileNames[0];
+            Text = Path.GetFileName(file) + " - " + FormText;
         }
 
         private void ParseFile()
@@ -178,13 +184,37 @@ namespace TravellingSalesmanProblem
 
         private void button1_Click(object sender, EventArgs e)
         {
+            ReadSettings();
+
+            if (_cities.Count == 0)
+            {
+                MessageBox.Show("Cannot start the algorithm, because cities list is empty.\nLoad proper locations file first!", "Cities list empty",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                return;
+            }
+
+            if (_lambda < 1 || _mi < 1 || _n < 1)
+            {
+                MessageBox.Show("Cannot start the algorithm, because λ, μ and n must be grater than zero!", "Bad parameters",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                return;
+            }
+
+            if (_lambda <= _mi)
+            {
+                MessageBox.Show("Cannot start the algorithm, because λ must be grater than μ!", "Bad parameters",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                return;
+            }
 
             RunAlgorithm();
         }
 
         private async void RunAlgorithm()
         {
-            ReadSettings();
             ChangeStart();
 
             var resultTour = Task<Tour>.Factory.StartNew(() => Program.Algorithm(_algorithm_type, _mi, _lambda, _n, _cities.Towns));
