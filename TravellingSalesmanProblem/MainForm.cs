@@ -272,7 +272,10 @@ namespace TravellingSalesmanProblem
 
         public void SetProgress(int progress)
         {
-            toolStripProgressBar1.Value = progress;
+            toolStripProgressBar1.Value = Math.Min(progress + 2, 100);
+            if (progress > 0)
+                toolStripProgressBar1.Value = progress + 1;
+
             label4.Text = "Status: Working (" + progress + "%)";
         }
 
