@@ -178,13 +178,12 @@ namespace TravellingSalesmanProblem
         {
             ReadSettings();
             ChangeStart();
-            _draw_edge_points.Clear();
-            listView1.Items.Clear();
 
             var resultTour = Task<Tour>.Factory.StartNew(() => Program.Algorithm(_algorithm_type, _mi, _lambda, _n, _cities.Towns));
-
             await resultTour;
 
+            _draw_edge_points.Clear();
+            listView1.Items.Clear();
 
             int i = 0;
             int? firstIdx = null;
