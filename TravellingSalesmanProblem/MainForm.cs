@@ -126,7 +126,15 @@ namespace TravellingSalesmanProblem
             {
                 float x = _draw_points[i].X - DotSize / 2.0f;
                 float y = _draw_points[i].Y - DotSize / 2.0f;
-                e.Graphics.FillRectangle(Brushes.Red, x, y, DotSize, DotSize);
+
+                Brush brush;
+
+                if (i != 0)
+                    brush = Brushes.Red;
+                else
+                    brush = Brushes.Blue;
+
+                e.Graphics.FillRectangle(brush, x, y, DotSize, DotSize);
             }
         }
 
