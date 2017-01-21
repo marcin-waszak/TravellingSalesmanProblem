@@ -69,14 +69,14 @@ namespace TravellingSalesmanProblem
             // Set second panel properties and add to StatusBar
             statusPanel_2.BorderStyle = StatusBarPanelBorderStyle.Raised;
             statusPanel_2.Width = 100;
-            statusPanel_2.Text = "Progress 50%";
+            statusPanel_2.Text = "Ready";
             //statusPanel_2.AutoSize = StatusBarPanelAutoSize.Spring;
             mainStatusBar.Panels.Add(statusPanel_2);
 
             mainStatusBar.SizingGrip = false;
             mainStatusBar.ShowPanels = true;
 
-            //In the end, we add StatusBar to the Form.
+            // In the end, we add StatusBar to the Form.
             Controls.Add(mainStatusBar);
 
             // Vertical dotted line bugfix
@@ -179,17 +179,31 @@ namespace TravellingSalesmanProblem
             ReadSettings();
             ChangeStart();
             _draw_edge_points.Clear();
+            listView1.Items.Clear();
 
             var resultTour = Task<Tour>.Factory.StartNew(() => Program.Algorithm(_algorithm_type, _mi, _lambda, _n, _cities.Towns));
 
             await resultTour;
 
+
+            int i = 0;
             int? firstIdx = null;
             foreach (var city in resultTour.Result.Cities)
             {
                 var idx = _cities.Towns.FindIndex(town => town.Name.Equals(city.Name));
                 firstIdx = firstIdx ?? idx;
                 _draw_edge_points.Add(idx);
+
+                ++i;
+                ListViewItem item = new ListViewItem(i.ToString());
+                item.SubItems.Add(city.Name);
+                item.SubItems.Add(city.Longitude.ToString());
+                item.SubItems.Add(city.Latitude.ToString());
+
+                if (i % 2 == 0)
+                    item.BackColor = Color.FromArgb(240, 240, 240);
+
+                listView1.Items.Add(item);
             }
             Debug.Assert(firstIdx != null, "firstIdx != null");
             _draw_edge_points.Add(firstIdx.Value);
@@ -249,6 +263,7 @@ namespace TravellingSalesmanProblem
         public void ChangeStart()
         {
             label4.Text = "Status: Working...";
+            statusPanel_2.Text = "Works...";
             button1.Enabled = false;
             groupBox1.Enabled = false;
             groupBox2.Enabled = false;
@@ -257,6 +272,7 @@ namespace TravellingSalesmanProblem
         public void ChangeFinish(Tour result)
         {
             label4.Text = "Status: Finished";
+            statusPanel_2.Text = "Finished";
             button1.Enabled = true;
             groupBox1.Enabled = true;
             groupBox2.Enabled = true;
