@@ -44,11 +44,6 @@ namespace TravellingSalesmanProblem
         private List<DrawPoint> _draw_points;
         private List<int> _draw_edge_points;
 
-        // Statusbar
-        StatusBar mainStatusBar;
-        StatusBarPanel statusPanel_1;
-        StatusBarPanel statusPanel_2;
-
         public MainForm(ref CitiesCollection cities)
         {
             Text = FormText;
@@ -59,29 +54,6 @@ namespace TravellingSalesmanProblem
             _draw_edge_points = new List<int>();
 
             InitializeComponent();
-
-            // Initialize Statusbar
-            mainStatusBar = new StatusBar();
-            statusPanel_1 = new StatusBarPanel();
-            statusPanel_2 = new StatusBarPanel();
-
-            // Set first panel properties and add to StatusBar
-            statusPanel_1.BorderStyle = StatusBarPanelBorderStyle.Sunken;
-            statusPanel_1.AutoSize = StatusBarPanelAutoSize.Spring;
-            mainStatusBar.Panels.Add(statusPanel_1);
-
-            // Set second panel properties and add to StatusBar
-            statusPanel_2.BorderStyle = StatusBarPanelBorderStyle.Raised;
-            statusPanel_2.Width = 100;
-            statusPanel_2.Text = "Ready";
-            //statusPanel_2.AutoSize = StatusBarPanelAutoSize.Spring;
-            mainStatusBar.Panels.Add(statusPanel_2);
-
-            mainStatusBar.SizingGrip = false;
-            mainStatusBar.ShowPanels = true;
-
-            // In the end, we add StatusBar to the Form.
-            Controls.Add(mainStatusBar);
 
             // Vertical dotted line bugfix
             AlgorithmPlusRadio.Select();
@@ -159,6 +131,7 @@ namespace TravellingSalesmanProblem
             ParseFile();
             string file = openFileDialog1.FileNames[0];
             Text = Path.GetFileName(file) + " - " + FormText;
+            toolStripStatusLabel1.Text = "Loaded " + _cities.Count + " cities from file";
         }
 
         private void ParseFile()
@@ -196,7 +169,7 @@ namespace TravellingSalesmanProblem
 
             if (_lambda < 1 || _mi < 1 || _n < 1)
             {
-                MessageBox.Show("Cannot start the algorithm, because λ, μ and n must be grater than zero!", "Bad parameters",
+                MessageBox.Show("Cannot start the algorithm, because λ, μ and n parameters have to be grater than zero!", "Bad parameters",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
                 return;
@@ -204,7 +177,7 @@ namespace TravellingSalesmanProblem
 
             if (_lambda <= _mi)
             {
-                MessageBox.Show("Cannot start the algorithm, because λ must be grater than μ!", "Bad parameters",
+                MessageBox.Show("Cannot start the algorithm, because λ has to be grater than μ!", "Bad parameters",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
                 return;
@@ -297,24 +270,29 @@ namespace TravellingSalesmanProblem
             _draw_cities.ScaleLatitude(1.6f); // 1.6 ~ 1/cos(52 deg), latitude correction
         }
 
+        public void SetProgress(int progress)
+        {
+            toolStripProgressBar1.Value = progress;
+        }
+
         public void ChangeStart()
         {
             label4.Text = "Status: Working...";
-            statusPanel_2.Text = "Works...";
             button1.Enabled = false;
             groupBox1.Enabled = false;
             groupBox2.Enabled = false;
+            toolStripProgressBar1.Visible = true;
         }
 
         public void ChangeFinish(Tour result)
         {
             label4.Text = "Status: Finished";
-            statusPanel_2.Text = "Finished";
             button1.Enabled = true;
             groupBox1.Enabled = true;
             groupBox2.Enabled = true;
 
-            statusPanel_1.Text = "Total tour distance " + result.GetDistance() + " km";
+            toolStripProgressBar1.Visible = false;
+            toolStripStatusLabel1.Text = "Total tour distance " + result.GetDistance() + " km";
         }
 
         private void enableAntialiasingToolStripMenuItem_Click(object sender, EventArgs e)
