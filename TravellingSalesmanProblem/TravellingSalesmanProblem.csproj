@@ -52,6 +52,9 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>TravellingSalesmanProblem.Program</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -68,6 +71,7 @@
   <ItemGroup>
     <Compile Include="CitiesCollection.cs" />
     <Compile Include="Population.cs" />
+    <Compile Include="TestProgram.cs" />
     <Compile Include="Tour.cs" />
     <Compile Include="TourCalculator.cs" />
     <Compile Include="City.cs" />

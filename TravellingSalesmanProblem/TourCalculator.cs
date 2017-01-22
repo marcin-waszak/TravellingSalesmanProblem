@@ -10,13 +10,13 @@ namespace TravellingSalesmanProblem
     {
         private const int NumOfSteps = 100;
         private readonly Random _random = new Random();
-        public Program.AlgorithmType AlgorithmType { get; }
+        public AlgorithmType AlgorithmType { get; }
         public int Mi { get; }
         public int Lambda { get; }
         public int NumOfCities { get;  }
         public IList<City> Cities { get; }
 
-        public TourCalculator(Program.AlgorithmType algorithmType, int mi, int lambda, int numOfCities, IList<City> cities)
+        public TourCalculator(AlgorithmType algorithmType, int mi, int lambda, int numOfCities, IList<City> cities)
         {
             AlgorithmType = algorithmType;
             Mi = mi;
@@ -46,7 +46,7 @@ namespace TravellingSalesmanProblem
                     repPopulation.Mutate();
                     // 4. utworz P jako mi osobnikow wybranych z P i R
                     Population populationToChoose;
-                    if (AlgorithmType == Program.AlgorithmType.MiPlusLambda)
+                    if (AlgorithmType == AlgorithmType.MiPlusLambda)
                     {
                         populationToChoose = new Population(Mi + Lambda)
                         {

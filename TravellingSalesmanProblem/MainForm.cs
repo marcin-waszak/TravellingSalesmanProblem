@@ -17,7 +17,7 @@ namespace TravellingSalesmanProblem
     {
         private const string FormText = "Travelling Salesman Problem";
 
-        private Program.AlgorithmType _algorithm_type;
+        private AlgorithmType _algorithm_type;
         private int _mi;
         private int _lambda;
         private int _n;
@@ -62,9 +62,9 @@ namespace TravellingSalesmanProblem
         private void ReadSettings()
         {
             if (AlgorithmPlusRadio.Checked)
-                _algorithm_type = Program.AlgorithmType.MiPlusLambda;
+                _algorithm_type = AlgorithmType.MiPlusLambda;
             else if (AlgorithmCommaRadio.Checked)
-                _algorithm_type = Program.AlgorithmType.MiCommaLambda;
+                _algorithm_type = AlgorithmType.MiCommaLambda;
 
             _mi = Convert.ToInt32(numericUpDown1.Value);
             _lambda = Convert.ToInt32(numericUpDown2.Value);
@@ -128,26 +128,11 @@ namespace TravellingSalesmanProblem
 
         private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
         {
-            ParseFile();
-            string file = openFileDialog1.FileNames[0];
-            Text = Path.GetFileName(file) + " - " + FormText;
-            toolStripStatusLabel1.Text = "Loaded " + _cities.Count + " cities from file";
-        }
-
-        private void ParseFile()
-        {
-            StreamReader my_reader = new StreamReader(openFileDialog1.FileName);
+            string filename = openFileDialog1.FileName;
             _cities = new CitiesCollection();
-
-            while (!my_reader.EndOfStream)
-            {
-                var line = my_reader.ReadLine();
-                var values = line.Split(';');
-
-                _cities.Add(new City(values));
-            }
-
-            my_reader.Close();
+            Utilities.ParseFile(filename, _cities);
+            Text = Path.GetFileName(filename) + " - " + FormText;
+            toolStripStatusLabel1.Text = "Loaded " + _cities.Count + " cities from file";
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)

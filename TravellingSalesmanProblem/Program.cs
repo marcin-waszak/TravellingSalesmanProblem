@@ -7,13 +7,14 @@ using System.Windows.Forms;
 
 namespace TravellingSalesmanProblem
 {
+    public enum AlgorithmType
+    {
+        MiPlusLambda,
+        MiCommaLambda
+    }
+
     static class Program
     {
-        public enum AlgorithmType {
-            MiPlusLambda,
-            MiCommaLambda
-        }
-
         private static CitiesCollection _cities;
 
         /// <summary>
@@ -34,10 +35,10 @@ namespace TravellingSalesmanProblem
             _cities = new CitiesCollection();
         }
 
-        public static Task<Tour> Algorithm(AlgorithmType algorithmTypeType, int mi, int lambda,
+        public static Task<Tour> Algorithm(AlgorithmType algorithmType, int mi, int lambda,
             int numberOfTowns, IList<City> towns, IProgress<int> progress)
         {
-            var tourCalculator = new TourCalculator(algorithmTypeType, mi, lambda, numberOfTowns, towns);
+            var tourCalculator = new TourCalculator(algorithmType, mi, lambda, numberOfTowns, towns);
             return tourCalculator.Run(progress);
         }
     }
