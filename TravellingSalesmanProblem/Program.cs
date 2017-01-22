@@ -36,9 +36,9 @@ namespace TravellingSalesmanProblem
         }
 
         public static Task<Tour> Algorithm(AlgorithmType algorithmType, int mi, int lambda, bool elitism,
-            int numberOfTowns, IList<City> towns, IProgress<int> progress)
+            int numberOfSteps, int numberOfTowns, IList<City> towns, IProgress<int> progress)
         {
-            var tourCalculator = new TourCalculator(algorithmType, mi, lambda, elitism, numberOfTowns, towns);
+            var tourCalculator = new TourCalculator(algorithmType, mi, lambda, elitism, numberOfSteps, numberOfTowns, towns);
             return tourCalculator.Run(progress);
         }
     }

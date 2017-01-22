@@ -50,6 +50,9 @@
             this.button1 = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.iterationsNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.elitismCheckBox = new System.Windows.Forms.CheckBox();
             this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
             this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
@@ -62,7 +65,6 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
-            this.elitismCheckBox = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -73,6 +75,7 @@
             this.tabPage2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.iterationsNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
@@ -151,7 +154,7 @@
             this.panel1.Controls.Add(this.splitContainer1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 28);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1312, 823);
             this.panel1.TabIndex = 1;
@@ -162,7 +165,7 @@
             this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
             this.splitContainer1.IsSplitterFixed = true;
             this.splitContainer1.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.splitContainer1.Margin = new System.Windows.Forms.Padding(4);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -175,7 +178,7 @@
             this.splitContainer1.Panel2.Controls.Add(this.groupBox2);
             this.splitContainer1.Panel2.Controls.Add(this.groupBox1);
             this.splitContainer1.Size = new System.Drawing.Size(1312, 823);
-            this.splitContainer1.SplitterDistance = 1154;
+            this.splitContainer1.SplitterDistance = 1150;
             this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 0;
             // 
@@ -185,18 +188,18 @@
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1154, 823);
+            this.tabControl1.Size = new System.Drawing.Size(1150, 823);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
             // 
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
-            this.tabPage1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(1146, 794);
+            this.tabPage1.Size = new System.Drawing.Size(1142, 794);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Graph";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -206,9 +209,9 @@
             // 
             this.tabPage2.Controls.Add(this.listView1);
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
-            this.tabPage2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(1095, 791);
+            this.tabPage2.Size = new System.Drawing.Size(1142, 794);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "List";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -222,9 +225,9 @@
             this.columnHeader4});
             this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listView1.Location = new System.Drawing.Point(0, 0);
-            this.listView1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.listView1.Margin = new System.Windows.Forms.Padding(4);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(1095, 791);
+            this.listView1.Size = new System.Drawing.Size(1142, 794);
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -253,10 +256,10 @@
             // 
             this.groupBox3.Controls.Add(this.button1);
             this.groupBox3.Controls.Add(this.label4);
-            this.groupBox3.Location = new System.Drawing.Point(16, 284);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox3.Location = new System.Drawing.Point(16, 329);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox3.Size = new System.Drawing.Size(172, 117);
             this.groupBox3.TabIndex = 6;
             this.groupBox3.TabStop = false;
@@ -265,7 +268,7 @@
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(21, 73);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(100, 28);
             this.button1.TabIndex = 1;
@@ -285,6 +288,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.label5);
+            this.groupBox2.Controls.Add(this.iterationsNumericUpDown);
             this.groupBox2.Controls.Add(this.elitismCheckBox);
             this.groupBox2.Controls.Add(this.numericUpDown3);
             this.groupBox2.Controls.Add(this.label3);
@@ -293,18 +298,62 @@
             this.groupBox2.Controls.Add(this.numericUpDown1);
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Location = new System.Drawing.Point(16, 113);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupBox2.Size = new System.Drawing.Size(172, 163);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox2.Size = new System.Drawing.Size(172, 208);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Algorithm parameters";
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(1, 154);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(42, 17);
+            this.label5.TabIndex = 8;
+            this.label5.Text = "steps";
+            // 
+            // iterationsNumericUpDown
+            // 
+            this.iterationsNumericUpDown.Location = new System.Drawing.Point(43, 152);
+            this.iterationsNumericUpDown.Margin = new System.Windows.Forms.Padding(4);
+            this.iterationsNumericUpDown.Maximum = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            0});
+            this.iterationsNumericUpDown.Minimum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.iterationsNumericUpDown.Name = "iterationsNumericUpDown";
+            this.iterationsNumericUpDown.Size = new System.Drawing.Size(113, 22);
+            this.iterationsNumericUpDown.TabIndex = 7;
+            this.iterationsNumericUpDown.Value = new decimal(new int[] {
+            500,
+            0,
+            0,
+            0});
+            // 
+            // elitismCheckBox
+            // 
+            this.elitismCheckBox.AutoSize = true;
+            this.elitismCheckBox.Checked = true;
+            this.elitismCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.elitismCheckBox.Location = new System.Drawing.Point(21, 124);
+            this.elitismCheckBox.Name = "elitismCheckBox";
+            this.elitismCheckBox.Size = new System.Drawing.Size(69, 21);
+            this.elitismCheckBox.TabIndex = 6;
+            this.elitismCheckBox.Text = "elitism";
+            this.elitismCheckBox.UseVisualStyleBackColor = true;
+            // 
             // numericUpDown3
             // 
             this.numericUpDown3.Location = new System.Drawing.Point(43, 95);
-            this.numericUpDown3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numericUpDown3.Margin = new System.Windows.Forms.Padding(4);
             this.numericUpDown3.Maximum = new decimal(new int[] {
             1000000,
             0,
@@ -332,7 +381,7 @@
             // numericUpDown2
             // 
             this.numericUpDown2.Location = new System.Drawing.Point(43, 63);
-            this.numericUpDown2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numericUpDown2.Margin = new System.Windows.Forms.Padding(4);
             this.numericUpDown2.Maximum = new decimal(new int[] {
             1000000,
             0,
@@ -360,7 +409,7 @@
             // numericUpDown1
             // 
             this.numericUpDown1.Location = new System.Drawing.Point(43, 31);
-            this.numericUpDown1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numericUpDown1.Margin = new System.Windows.Forms.Padding(4);
             this.numericUpDown1.Maximum = new decimal(new int[] {
             1000000,
             0,
@@ -390,9 +439,9 @@
             this.groupBox1.Controls.Add(this.AlgorithmCommaRadio);
             this.groupBox1.Controls.Add(this.AlgorithmPlusRadio);
             this.groupBox1.Location = new System.Drawing.Point(16, 11);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox1.Size = new System.Drawing.Size(172, 95);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
@@ -402,7 +451,7 @@
             // 
             this.AlgorithmCommaRadio.AutoSize = true;
             this.AlgorithmCommaRadio.Location = new System.Drawing.Point(21, 58);
-            this.AlgorithmCommaRadio.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.AlgorithmCommaRadio.Margin = new System.Windows.Forms.Padding(4);
             this.AlgorithmCommaRadio.Name = "AlgorithmCommaRadio";
             this.AlgorithmCommaRadio.Size = new System.Drawing.Size(56, 21);
             this.AlgorithmCommaRadio.TabIndex = 1;
@@ -414,7 +463,7 @@
             this.AlgorithmPlusRadio.AutoSize = true;
             this.AlgorithmPlusRadio.Checked = true;
             this.AlgorithmPlusRadio.Location = new System.Drawing.Point(21, 30);
-            this.AlgorithmPlusRadio.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.AlgorithmPlusRadio.Margin = new System.Windows.Forms.Padding(4);
             this.AlgorithmPlusRadio.Name = "AlgorithmPlusRadio";
             this.AlgorithmPlusRadio.Size = new System.Drawing.Size(60, 21);
             this.AlgorithmPlusRadio.TabIndex = 0;
@@ -451,18 +500,6 @@
             this.toolStripProgressBar1.Step = 1;
             this.toolStripProgressBar1.Visible = false;
             // 
-            // elitismCheckBox
-            // 
-            this.elitismCheckBox.AutoSize = true;
-            this.elitismCheckBox.Checked = true;
-            this.elitismCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.elitismCheckBox.Location = new System.Drawing.Point(21, 124);
-            this.elitismCheckBox.Name = "elitismCheckBox";
-            this.elitismCheckBox.Size = new System.Drawing.Size(69, 21);
-            this.elitismCheckBox.TabIndex = 6;
-            this.elitismCheckBox.Text = "elitism";
-            this.elitismCheckBox.UseVisualStyleBackColor = true;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -472,7 +509,7 @@
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.statusStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MinimumSize = new System.Drawing.Size(527, 358);
             this.Name = "MainForm";
             this.Text = "Travelling Salesman Problem";
@@ -489,6 +526,7 @@
             this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.iterationsNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
@@ -537,6 +575,8 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar1;
         private System.Windows.Forms.CheckBox elitismCheckBox;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.NumericUpDown iterationsNumericUpDown;
     }
 }
 
