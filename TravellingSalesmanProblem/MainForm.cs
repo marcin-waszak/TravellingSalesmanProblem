@@ -21,6 +21,7 @@ namespace TravellingSalesmanProblem
         private int _mi;
         private int _lambda;
         private int _n;
+        private bool _elitism;
 
         private CitiesCollection _cities;
         private CitiesCollection _draw_cities;
@@ -69,6 +70,7 @@ namespace TravellingSalesmanProblem
             _mi = Convert.ToInt32(numericUpDown1.Value);
             _lambda = Convert.ToInt32(numericUpDown2.Value);
             _n = Convert.ToInt32(numericUpDown3.Value);
+            _elitism = elitismCheckBox.Checked;
         }
 
         private void tabPage1_Paint(object sender, PaintEventArgs e)
@@ -176,7 +178,7 @@ namespace TravellingSalesmanProblem
             ChangeStart();
 
             var progress_indicator = new Progress<int>(SetProgress);
-            var result_tour = await Program.Algorithm(_algorithm_type, _mi, _lambda, _n, _cities.Towns, progress_indicator);
+            var result_tour = await Program.Algorithm(_algorithm_type, _mi, _lambda, _elitism,  _n, _cities.Towns, progress_indicator);
 
             _draw_edge_points.Clear();
             listView1.Items.Clear();
