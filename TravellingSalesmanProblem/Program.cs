@@ -35,10 +35,10 @@ namespace TravellingSalesmanProblem
             _cities = new CitiesCollection();
         }
 
-        public static Task<Tour> Algorithm(AlgorithmType algorithmType, int mi, int lambda, double mutationRate,
-            bool elitism, int numberOfSteps, int numberOfTowns, IList<City> towns, IProgress<int> progress)
+        public static Task<Tour> Algorithm(AlgorithmType algorithmType, int mi, int lambda, bool elitism,
+            int numberOfSteps, int numberOfTowns, IList<City> towns, IProgress<int> progress)
         {
-            var tourCalculator = new TourCalculator(algorithmType, mi, lambda, mutationRate, elitism, numberOfSteps, numberOfTowns, towns);
+            var tourCalculator = new TourCalculator(algorithmType, mi, lambda, elitism, numberOfSteps, numberOfTowns, towns);
             return tourCalculator.Run(progress);
         }
     }

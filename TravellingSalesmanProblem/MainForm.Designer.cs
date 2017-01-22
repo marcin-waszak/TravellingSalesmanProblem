@@ -65,8 +65,6 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
-            this.label6 = new System.Windows.Forms.Label();
-            this.mutationNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -83,7 +81,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.mutationNumericUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -181,7 +178,7 @@
             this.splitContainer1.Panel2.Controls.Add(this.groupBox2);
             this.splitContainer1.Panel2.Controls.Add(this.groupBox1);
             this.splitContainer1.Size = new System.Drawing.Size(1312, 823);
-            this.splitContainer1.SplitterDistance = 1149;
+            this.splitContainer1.SplitterDistance = 1150;
             this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 0;
             // 
@@ -194,7 +191,7 @@
             this.tabControl1.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1149, 823);
+            this.tabControl1.Size = new System.Drawing.Size(1150, 823);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -202,7 +199,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(1141, 794);
+            this.tabPage1.Size = new System.Drawing.Size(1142, 794);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Graph";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -214,7 +211,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(1141, 794);
+            this.tabPage2.Size = new System.Drawing.Size(1142, 794);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "List";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -230,7 +227,7 @@
             this.listView1.Location = new System.Drawing.Point(0, 0);
             this.listView1.Margin = new System.Windows.Forms.Padding(4);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(1141, 794);
+            this.listView1.Size = new System.Drawing.Size(1142, 794);
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -259,7 +256,7 @@
             // 
             this.groupBox3.Controls.Add(this.button1);
             this.groupBox3.Controls.Add(this.label4);
-            this.groupBox3.Location = new System.Drawing.Point(16, 371);
+            this.groupBox3.Location = new System.Drawing.Point(16, 329);
             this.groupBox3.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(4);
@@ -291,8 +288,6 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.mutationNumericUpDown);
-            this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.iterationsNumericUpDown);
             this.groupBox2.Controls.Add(this.elitismCheckBox);
@@ -306,7 +301,7 @@
             this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox2.Size = new System.Drawing.Size(172, 250);
+            this.groupBox2.Size = new System.Drawing.Size(172, 208);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Algorithm parameters";
@@ -505,40 +500,6 @@
             this.toolStripProgressBar1.Step = 1;
             this.toolStripProgressBar1.Visible = false;
             // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(1, 197);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(91, 17);
-            this.label6.TabIndex = 9;
-            this.label6.Text = "mutation rate";
-            // 
-            // mutationNumericUpDown
-            // 
-            this.mutationNumericUpDown.Cursor = System.Windows.Forms.Cursors.Default;
-            this.mutationNumericUpDown.DecimalPlaces = 3;
-            this.mutationNumericUpDown.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            131072});
-            this.mutationNumericUpDown.InterceptArrowKeys = false;
-            this.mutationNumericUpDown.Location = new System.Drawing.Point(43, 217);
-            this.mutationNumericUpDown.Maximum = new decimal(new int[] {
-            10,
-            0,
-            0,
-            65536});
-            this.mutationNumericUpDown.Name = "mutationNumericUpDown";
-            this.mutationNumericUpDown.Size = new System.Drawing.Size(113, 22);
-            this.mutationNumericUpDown.TabIndex = 10;
-            this.mutationNumericUpDown.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -573,7 +534,6 @@
             this.groupBox1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.mutationNumericUpDown)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -617,8 +577,6 @@
         private System.Windows.Forms.CheckBox elitismCheckBox;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.NumericUpDown iterationsNumericUpDown;
-        private System.Windows.Forms.NumericUpDown mutationNumericUpDown;
-        private System.Windows.Forms.Label label6;
     }
 }
 

@@ -7,6 +7,7 @@ namespace TravellingSalesmanProblem
     {
         public IList<Tour> Tours { get; set; }
         private readonly int _size;
+        private const double MutationRate = 0.015;
         private const int TournamentSize = 5;
         private readonly Random _random = new Random();
 
@@ -52,13 +53,13 @@ namespace TravellingSalesmanProblem
             return newPopulation;
         }
 
-        public void Mutate(double mutationRate)
+        public void Mutate()
         {
             foreach (var tour in Tours)
             {
                 for (var i = 0; i < tour.Cities.Count; i++)
                 {
-                    if (_random.NextDouble() >= mutationRate) continue;
+                    if (_random.NextDouble() >= MutationRate) continue;
 
                     var j = _random.Next(tour.Cities.Count);
 

@@ -17,14 +17,11 @@ namespace TravellingSalesmanProblem
     {
         public const int MinIterations = 10;
         public const int MaxIterations = 10000000;
-        public const double MinMutationRate = 0.0;
-        public const double MaxMutationRate = 1.0;
         private const string FormText = "Travelling Salesman Problem";
 
         private AlgorithmType _algorithm_type;
         private int _mi;
         private int _lambda;
-        private double _mutationRate;
         private int _n;
         private bool _elitism;
         private int _iterations;
@@ -75,7 +72,6 @@ namespace TravellingSalesmanProblem
 
             _mi = Convert.ToInt32(numericUpDown1.Value);
             _lambda = Convert.ToInt32(numericUpDown2.Value);
-            _mutationRate = Convert.ToDouble(mutationNumericUpDown.Value);
             _n = Convert.ToInt32(numericUpDown3.Value);
             _elitism = elitismCheckBox.Checked;
             _iterations = Convert.ToInt32(iterationsNumericUpDown.Value);
@@ -186,14 +182,6 @@ namespace TravellingSalesmanProblem
                 return;
             }
 
-            if (_mutationRate < MinMutationRate || _mutationRate > MaxMutationRate)
-            {
-                MessageBox.Show($"Cannot start the algorithm, because mutation rate is incorrect! Must be in [${MinMutationRate}, ${MaxMutationRate}]", "Bad parameters",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
-                return;
-            }
-
             RunAlgorithm();
         }
 
@@ -202,8 +190,7 @@ namespace TravellingSalesmanProblem
             ChangeStart();
 
             var progress_indicator = new Progress<int>(SetProgress);
-            var result_tour = await Program.Algorithm(_algorithm_type, _mi, _lambda, _mutationRate,
-                _elitism, _iterations, _n, _cities.Towns, progress_indicator);
+            var result_tour = await Program.Algorithm(_algorithm_type, _mi, _lambda, _elitism, _iterations, _n, _cities.Towns, progress_indicator);
 
             _draw_edge_points.Clear();
             listView1.Items.Clear();
