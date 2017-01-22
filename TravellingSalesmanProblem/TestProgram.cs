@@ -9,6 +9,7 @@ namespace TravellingSalesmanProblem
     static class TestProgram
     {
         private static CitiesCollection _cities;
+        private const bool Elitism = true;
 
         /// <summary>
         /// The main entry point for the application.
@@ -26,7 +27,7 @@ namespace TravellingSalesmanProblem
             string filename = args[0];
             Utilities.ParseFile(filename, _cities);
 
-            var tourCalculator = new TourCalculator(AlgorithmType.MiPlusLambda, 2000, 3000, 10, _cities.Towns);
+            var tourCalculator = new TourCalculator(AlgorithmType.MiPlusLambda, 2000, 3000, Elitism, 10, _cities.Towns);
 
             Tour tour = tourCalculator.Run(null).Result;
             float distance = tour.GetDistance();

@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -13,27 +12,32 @@ namespace TravellingSalesmanProblem
         public AlgorithmType AlgorithmType { get; }
         public int Mi { get; }
         public int Lambda { get; }
+        private bool Elitism { get; }
         public int NumOfCities { get;  }
         public IList<City> Cities { get; }
 
-        public TourCalculator(AlgorithmType algorithmType, int mi, int lambda, int numOfCities, IList<City> cities)
+        public TourCalculator(AlgorithmType algorithmType, int mi, int lambda, bool elitism, int numOfCities, IList<City> cities)
         {
             AlgorithmType = algorithmType;
             Mi = mi;
             Lambda = lambda;
+            Elitism = elitism;
             NumOfCities = numOfCities;
             Cities = cities.Take(numOfCities).ToList();
         }
         
         public async Task<Tour> Run(IProgress<int> progress)
         {
-            Tour result_tour = await Task.Run<Tour>(() =>
+            var resultTour = await Task.Run(() =>
             {
                 // 1. wygeneruj P - populacje mi osobnikow
                 var initialPopulation = new Population(Mi);
                 initialPopulation.Initialize(Cities);
                 for (var i = 0; i < NumOfSteps; i++)
                 {
+                    // Strategia Elitarna - zachowaj najlepszego osobnika
+                    var elite = initialPopulation.GetFittest();
+
                     // 2. wylosuj z P lambda-elementowa tymczasowa populacje T
                     var tempPopulation = new Population(Lambda);
                     for (var j = 0; j < Lambda; j++)
@@ -57,17 +61,29 @@ namespace TravellingSalesmanProblem
                     {
                         populationToChoose = repPopulation;
                     }
-                    initialPopulation.Tours = populationToChoose.Tours
-                        .OrderBy(x => _random.Next())
-                        .Take(Mi)
-                        .ToList();
 
-                    if (progress != null)
-                        progress.Report(i * 100 / NumOfSteps);
+                    // Strategia Elitarna - zachowaj najlepszego osobnika z poprzedniej populacji w kolejnej:
+                    if (Elitism)
+                    {
+                        initialPopulation.Tours = populationToChoose.Tours
+                            .OrderBy(x => _random.Next())
+                            .Take(Mi - 1)
+                            .ToList();
+                        initialPopulation.Tours.Add(elite);
+                    }
+                    else
+                    {
+                        initialPopulation.Tours = populationToChoose.Tours
+                            .OrderBy(x => _random.Next())
+                            .Take(Mi)
+                            .ToList();
+                    }
+
+                    progress?.Report(i * 100 / NumOfSteps);
                 }
                 return initialPopulation.GetFittest();
             });
-            return result_tour;
+            return resultTour;
         }
     }
 }
