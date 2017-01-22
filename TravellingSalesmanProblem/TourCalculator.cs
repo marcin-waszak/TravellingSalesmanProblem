@@ -11,22 +11,25 @@ namespace TravellingSalesmanProblem
         public AlgorithmType AlgorithmType { get; }
         public int Mi { get; }
         public int Lambda { get; }
+        public double MutationRate { get; }
         private bool Elitism { get; }
         private int NumOfSteps { get; }
         public int NumOfCities { get;  }
         public IList<City> Cities { get; }
 
-        public TourCalculator(AlgorithmType algorithmType, int mi, int lambda, bool elitism, int numOfSteps, int numOfCities, IList<City> cities)
+        public TourCalculator(AlgorithmType algorithmType, int mi, int lambda, double mutationRate,
+            bool elitism, int numOfSteps, int numOfCities, IList<City> cities)
         {
             AlgorithmType = algorithmType;
             Mi = mi;
             Lambda = lambda;
+            MutationRate = mutationRate;
             Elitism = elitism;
             NumOfSteps = numOfSteps;
             NumOfCities = numOfCities;
             Cities = cities.Take(numOfCities).ToList();
         }
-        
+
         public async Task<Tour> Run(IProgress<int> progress)
         {
             var resultTour = await Task.Run(() =>
@@ -48,7 +51,7 @@ namespace TravellingSalesmanProblem
 
                     // 3. reprodukuj z T lambda-elementowa populacje potomna R stosujac krzyzowanie i mutacje
                     var repPopulation = tempPopulation.Crossover();
-                    repPopulation.Mutate();
+                    repPopulation.Mutate(MutationRate);
                     // 4. utworz P jako mi osobnikow wybranych z P i R
                     Population populationToChoose;
                     if (AlgorithmType == AlgorithmType.MiPlusLambda)
