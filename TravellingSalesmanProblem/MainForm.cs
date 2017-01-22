@@ -15,6 +15,8 @@ namespace TravellingSalesmanProblem
 {
     public partial class MainForm : Form
     {
+        public const int MinIterations = 10;
+        public const int MaxIterations = 10000000;
         private const string FormText = "Travelling Salesman Problem";
 
         private AlgorithmType _algorithm_type;
@@ -22,6 +24,7 @@ namespace TravellingSalesmanProblem
         private int _lambda;
         private int _n;
         private bool _elitism;
+        private int _iterations;
 
         private CitiesCollection _cities;
         private CitiesCollection _draw_cities;
@@ -71,6 +74,7 @@ namespace TravellingSalesmanProblem
             _lambda = Convert.ToInt32(numericUpDown2.Value);
             _n = Convert.ToInt32(numericUpDown3.Value);
             _elitism = elitismCheckBox.Checked;
+            _iterations = Convert.ToInt32(iterationsNumericUpDown.Value);
         }
 
         private void tabPage1_Paint(object sender, PaintEventArgs e)
@@ -156,7 +160,7 @@ namespace TravellingSalesmanProblem
 
             if (_lambda < 1 || _mi < 1 || _n < 1)
             {
-                MessageBox.Show("Cannot start the algorithm, because λ, μ and n parameters have to be grater than zero!", "Bad parameters",
+                MessageBox.Show("Cannot start the algorithm, because λ, μ and n parameters have to be greater than zero!", "Bad parameters",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
                 return;
@@ -164,7 +168,15 @@ namespace TravellingSalesmanProblem
 
             if (_lambda <= _mi)
             {
-                MessageBox.Show("Cannot start the algorithm, because λ has to be grater than μ!", "Bad parameters",
+                MessageBox.Show("Cannot start the algorithm, because λ has to be greater than μ!", "Bad parameters",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                return;
+            }
+
+            if (_iterations < MinIterations || _iterations > MaxIterations)
+            {
+                MessageBox.Show($"Cannot start the algorithm, because steps number is incorrect! Must be in [${MinIterations}, ${MaxIterations}]", "Bad parameters",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
                 return;
@@ -178,7 +190,7 @@ namespace TravellingSalesmanProblem
             ChangeStart();
 
             var progress_indicator = new Progress<int>(SetProgress);
-            var result_tour = await Program.Algorithm(_algorithm_type, _mi, _lambda, _elitism,  _n, _cities.Towns, progress_indicator);
+            var result_tour = await Program.Algorithm(_algorithm_type, _mi, _lambda, _elitism, _iterations, _n, _cities.Towns, progress_indicator);
 
             _draw_edge_points.Clear();
             listView1.Items.Clear();

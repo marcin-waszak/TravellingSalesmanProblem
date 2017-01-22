@@ -7,21 +7,22 @@ namespace TravellingSalesmanProblem
 {
     class TourCalculator
     {
-        private const int NumOfSteps = 100;
         private readonly Random _random = new Random();
         public AlgorithmType AlgorithmType { get; }
         public int Mi { get; }
         public int Lambda { get; }
         private bool Elitism { get; }
+        private int NumOfSteps { get; }
         public int NumOfCities { get;  }
         public IList<City> Cities { get; }
 
-        public TourCalculator(AlgorithmType algorithmType, int mi, int lambda, bool elitism, int numOfCities, IList<City> cities)
+        public TourCalculator(AlgorithmType algorithmType, int mi, int lambda, bool elitism, int numOfSteps, int numOfCities, IList<City> cities)
         {
             AlgorithmType = algorithmType;
             Mi = mi;
             Lambda = lambda;
             Elitism = elitism;
+            NumOfSteps = numOfSteps;
             NumOfCities = numOfCities;
             Cities = cities.Take(numOfCities).ToList();
         }
