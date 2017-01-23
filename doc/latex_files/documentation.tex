@@ -45,9 +45,9 @@ Tak przygotowana lista jest wyświetlana w oknie za pomocą grafu.
 Implementacja algorytmu znajduje się przede wszystkim w klasie TourCalculator, która to jest za niego odpowiedzialna. Po uruchomieniu metody $Run()$ tej klasy wykonane zostają następujące kroki:
 \begin{enumerate}
 \item Zainicjalizowana przekazanymi do metody miastami zostaje nowa $\mu$-elementowa populacja $initialPopulation$.
-\item Dla liczby zdefiniowanych kroków (przyjęto 100) zostają wykonane operacje reprodukcji:
+\item Dla liczby zadanych kroków zostają wykonane operacje reprodukcji:
 	\begin{enumerate}
-	\item Losowana jest z populacji początkowej $\lambda$-elementowapopulacja tymczasowa $tempPopulation$
+	\item Losowana jest z populacji początkowej $\lambda$-elementowa populacja tymczasowa $tempPopulation$
 	\item Populacja tymczasowa jest \textbf{krzyżowana}, a wyniki tego krzyżowania zapisywane są w populacji zreprodukowanej $repPopulation$
 	\item Populacja zreprodukowana $repPopulation$ poddawana jest \textbf{mutacji}.
 	\item Nowa populacja początkowa ($\mu$-elementowa) dla kolejnego kroku algorytmu wybierana jest z populacji przeznaczonej do tego wyboru poprzez losowanie z niej $mi$ elementów. Populacja przeznaczona do tego losowania tworzona jest w zależności od wybranego algorytmu:
@@ -55,11 +55,12 @@ Implementacja algorytmu znajduje się przede wszystkim w klasie TourCalculator, 
 		\item Dla $(\mu + \lambda)$ są to połączone populacje początkowa i zreprodukowana.
 		\item Dla $(\mu, \lambda)$ jest to tylko populacja zreprodukowana.
 		\end{enumerate}
+	Co więcej, jeśli stosowana jest strategia elitarna, najlepszy osobnik z populacji początkowej jest przenoszony do kolejnej populacji początkowej (w nastepnej iteracji).
 	\end{enumerate}
 	\item Po zakończeniu wszystkich zadanych iteracji zwracany jest osobnik ($Tour$) o najlepszej funkcji przystosowania, czyli najkrótszej odległości łączącej wszystkie miasta.
 \end{enumerate}
 
-\subsection{Krzyżowania}
+\subsection{Krzyżowanie}
 Krzyżowanie zaimplementowane w metodzie $Crossover$ klasy $Population$ składa się z dwóch kroków:
 \begin{enumerate}
 \item Wybranie rodziców - metoda wybora to turniej. Polega on na stworzeniu niewielkiej populacji (przyjęto 5-elementową), do której osobniki losowane są z populacji, którą krzyżujemy. Następnie z członków turnieju wybierany jest ten o najlepszej funkcji przystosowania. Tworzymy dwa turnieje i po ich rozegraniu otrzymujemy dwoje rodziców.
@@ -69,6 +70,6 @@ Krzyżowanie zaimplementowane w metodzie $Crossover$ klasy $Population$ składa 
 \subsection{Mutacja}
 Mutacja zaimplementowana w metodzie $Mutate$ klasy $Population$ polega na zmianie kolejności niektórych miast w osobnikach w sposób losowy. Czy mutacja zachodzi dla danego miasta w osobniku czy nie wynika z wylosowanej liczby, która jeśli jest większa lub równa od czynnika $MutationRate$ to mutacja zachodzi, w przeciwnym razie nie.\\
 Jeśli okazuje się, że zachodzi wtedy losujemy drugie miasto w osobniku i zamieniamy miejscami z analizowanym.\\
-Czynnik $MutationRate$ określa prawdopodobieństwo wystąpienia mutacji i został przyjęty jako $0.015$
+Czynnik $MutationRate$ określa prawdopodobieństwo wystąpienia mutacji.
 
 \end{document}
